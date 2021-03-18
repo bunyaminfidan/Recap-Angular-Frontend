@@ -1,0 +1,43 @@
+<div class="accordion-body">
+  <div
+    *ngIf="dataLoaded == false"
+    class="spinner-border text-primary"
+    role="status"
+  >
+    <span class="visually-hidden">Yükleniyor...</span>
+  </div>
+
+  <table *ngIf="dataLoaded == true" class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ADI</th>
+        <th scope="col">MARKA</th>
+        <th scope="col">RENK</th>
+        <th scope="col">GÜNLÜK FİYAT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carDetail of carDetails">
+        <td scope="row">{{ carDetail.id }}</td>
+        <td scope="row">{{ carDetail.description }}</td>
+        <td scope="row">{{ carDetail.brandName }}</td>
+        <td scope="row">{{ carDetail.colorName }}</td>
+        <td scope="row">{{ carDetail.dailyPrice }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="carousel-inner">
+    <div *ngFor="let carDetail of carDetails">
+
+      <img
+        [src]="carDetail.imagePath"
+        class="d-block w-100"
+        width="640"
+        height="480"
+        alt="{{carDetail.imagePath}}"
+      />
+    </div>
+  </div>
+</div>
