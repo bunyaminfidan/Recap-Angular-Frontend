@@ -18,15 +18,15 @@ export class CarService {
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
-  getCarsByBrands(id: number): Observable<ListResponseModel<Car>> {
+  getCarsByBrands(brandId: number): Observable<ListResponseModel<Car>> {
     // return this.httpClient.get<ListResponseModel<Car>>(this.apiUrl);
-    let newPath = this.apiUrl + 'cars/getbybrandidcardetail?id=' + id;
+    let newPath = this.apiUrl + 'cars/getbybrandidcardetail?id=' + brandId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
-  getCarsByColors(id: number): Observable<ListResponseModel<Car>> {
+  getCarsByColors(colorId: number): Observable<ListResponseModel<Car>> {
     // return this.httpClient.get<ListResponseModel<Car>>(this.apiUrl);
-    let newPath = this.apiUrl + 'cars/getbycoloridcardetail?id=' + id;
+    let newPath = this.apiUrl + 'cars/getbycoloridcardetail?id=' + colorId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 }
