@@ -27,20 +27,6 @@
       </tr>
     </tbody>
   </table>
-
-  <div class="carousel-inner">
-    <div *ngFor="let carDetail of carDetails">
-
-      <img
-        src="{{basePath}}/{{carDetail.imagePath}}"
-        
-        class="d-block w-100"
-        width="640"
-        height="480"
-        alt="{{basePath}}/{{carDetail.imagePath}}"
-    
-       
-      />
-    </div>
-  </div>
+  
+  <app-car-image></app-car-image>
 </div>

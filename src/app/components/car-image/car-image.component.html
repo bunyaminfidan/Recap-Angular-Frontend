@@ -1,0 +1,21 @@
+<div class="accordion-body">
+  <div
+    *ngIf="dataLoaded == false"
+    class="spinner-border text-primary"
+    role="status"
+  >
+    <span class="visually-hidden">Yükleniyor...</span>
+  </div>
+
+  <div class="carousel-inner">
+    <div *ngFor="let carImage of carImages">
+      <img
+        src="{{ basePath }}{{ carImage.imagePath }}"
+        class="d-block w-100"
+        width="640"
+        height="480"
+        alt="{{ carImage.imagePath }}"
+      />
+    </div>
+  </div>
+</div>

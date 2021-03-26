@@ -18,12 +18,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let car of cars" routerLink="/cars/carDetail/{{ car.id }}">
+      <tr *ngFor="let car of cars" 
+      routerLink="/cars/carDetail/{{ car.id }}"
+      
+      
+      >
         <td scope="row">{{ car.id }}</td>
         <td scope="row">{{ car.carName }}</td>
         <td scope="row">{{ car.brandName }}</td>
         <td scope="row">{{ car.colorName }}</td>
         <td scope="row">{{ car.dailyPrice }}</td>
+        
       </tr>
     </tbody>
   </table>
