@@ -32,11 +32,14 @@
     <div *ngFor="let carDetail of carDetails">
 
       <img
-        [src]="carDetail.imagePath"
+        src="{{basePath}}/{{carDetail.imagePath}}"
+        
         class="d-block w-100"
         width="640"
         height="480"
-        alt="{{carDetail.imagePath}}"
+        alt="{{basePath}}/{{carDetail.imagePath}}"
+    
+       
       />
     </div>
   </div>

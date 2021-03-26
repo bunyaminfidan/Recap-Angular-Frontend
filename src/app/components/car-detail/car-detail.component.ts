@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarDetailService } from 'src/app/services/car-detail.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-car-detail',
@@ -11,6 +12,7 @@ import { CarDetailService } from 'src/app/services/car-detail.service';
 export class CarDetailComponent implements OnInit {
   carDetails: CarDetail[] = [];
   dataLoaded: boolean = false;
+  basePath = environment.baseURL;
 
   constructor(
     private carDetailService: CarDetailService,
