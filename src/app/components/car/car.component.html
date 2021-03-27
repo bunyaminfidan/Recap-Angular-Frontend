@@ -7,6 +7,24 @@
     <span class="visually-hidden">Yükleniyor...</span>
   </div>
 
+  <div class="mb-3">
+    <label for="filterText" class="form-label">Araba Ara</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="filterText"
+      id="filterText"
+      placeholder="Arama ifadesi giriniz"
+    />
+  </div>
+
+  <div *ngIf="filterText" class="alert alert-success">
+    {{ filterText }} aradınız
+  </div>
+
+  <app-car-filter></app-car-filter>
+  
+
   <table *ngIf="dataLoaded == true" class="table table-hover">
     <thead class="thead-dark">
       <tr>
@@ -18,17 +36,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let car of cars" 
-      routerLink="/cars/carDetail/{{ car.id }}"
-      
-      
+      <tr
+        *ngFor="let car of cars | filterPipe: filterText"
+        routerLink="/cars/carDetail/{{ car.id }}"
       >
         <td scope="row">{{ car.id }}</td>
-        <td scope="row">{{ car.carName }}</td>
+        <td scope="row">{{ car.description | uppercase }}</td>
         <td scope="row">{{ car.brandName }}</td>
         <td scope="row">{{ car.colorName }}</td>
         <td scope="row">{{ car.dailyPrice }}</td>
-        
       </tr>
     </tbody>
   </table>

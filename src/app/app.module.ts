@@ -12,6 +12,9 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
+import {FormsModule} from '@angular/forms';// ngModule kullanmak için. html de girilen texti alabilmek için.
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { CarFilterComponent } from './components/car-filter/car-filter.component'; 
 
 @NgModule({
   declarations: [
@@ -24,11 +27,14 @@ import { CarImageComponent } from './components/car-image/car-image.component';
     RentalComponent,
     CarDetailComponent,
     CarImageComponent,
+    FilterPipePipe,
+    CarFilterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, // api istek için http isteği için gerek
+    FormsModule  // ngModule kullanmak için. html de girilen texti alabilmek için. benim uygulamama forms ile ilgili çalışmları desteğini ver
   ],
   providers: [],
   bootstrap: [AppComponent],
