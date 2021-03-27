@@ -34,8 +34,7 @@ export class CarFilterComponent implements OnInit {
 
   getColors() {
     this.colorService.getColors().subscribe((response) => {
-      this.colors = response.data;
-      console.log('colors: ' + this.colors);
+      this.colors = response.data; 
     });
   }
 

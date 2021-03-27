@@ -23,29 +23,41 @@
   </div>
 
   <app-car-filter></app-car-filter>
-  
 
-  <table *ngIf="dataLoaded == true" class="table table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">ADI</th>
-        <th scope="col">MARKA</th>
-        <th scope="col">RENK</th>
-        <th scope="col">GÜNLÜK FİYAT</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let car of cars | filterPipe: filterText"
+  <div class="row" *ngIf="dataLoaded == true">
+    <div class="card" *ngFor="let car of cars" style="width: 18rem">
+      <img
+        [src]="imageIsNullCheck(car.imagePath)"
+        style="height: 150px"
         routerLink="/cars/carDetail/{{ car.id }}"
-      >
-        <td scope="row">{{ car.id }}</td>
-        <td scope="row">{{ car.description | uppercase }}</td>
-        <td scope="row">{{ car.brandName }}</td>
-        <td scope="row">{{ car.colorName }}</td>
-        <td scope="row">{{ car.dailyPrice }}</td>
-      </tr>
-    </tbody>
-  </table>
+        class="img-fluid img-thumbnail"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ car.description }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Marka: {{ car.brandName }}</li>
+        <li class="list-group-item">Model: {{ car.modelYear }}</li>
+        <li class="list-group-item">
+          Günlük Fiyat:
+          {{ car.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2" }}
+        </li>
+      </ul>
+      <div class="card-body">
+        <section style="float: left">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            routerLink="/cars/carDetail/{{ car.id }}"
+          >
+            İncele
+          </button>
+        </section>
+
+        <section style="float: right">
+          <button type="button" class="btn btn-success">Kirala</button>
+        </section>
+      </div>
+    </div>
+  </div>
 </div>

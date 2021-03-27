@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-car',
@@ -11,6 +12,8 @@ import { CarService } from 'src/app/services/car.service';
 export class CarComponent implements OnInit {
   cars: Car[] = [];
   dataLoaded: boolean = false;
+  basePath = environment.baseURL;
+  defaultImages = environment.defaultImages;
   filterText = '';
 
   constructor(
@@ -59,5 +62,14 @@ export class CarComponent implements OnInit {
       this.cars = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  imageIsNullCheck(imagePath: string[]) {
+    // "{{ basePath }}{{ car.imagePath[0] }}"
+    if (imagePath.length > 0) {
+      return this.basePath + imagePath[0];
+    } else {
+      return this.basePath + this.defaultImages;
+    }
   }
 }
