@@ -8,11 +8,18 @@ import { ListResponseModel } from '../models/listResponseModel';
   providedIn: 'root',
 })
 export class CustomerService {
-  apiUrl = 'https://localhost:44320/api/customers/getalldetail';
+  apiUrl = 'https://localhost:44320/api/';
 
   constructor(private httpClient: HttpClient) {}
 
   getCustomers(): Observable<ListResponseModel<Customer>> {
-    return this.httpClient.get<ListResponseModel<Customer>>(this.apiUrl);
+    let newPath = this.apiUrl + 'customers/getalldetail';
+    return this.httpClient.get<ListResponseModel<Customer>>(newPath);
+  }
+
+  getCustomerById(customerId: number): Observable<ListResponseModel<Customer>> {
+    let newPath =
+      this.apiUrl + 'customers/getbyidcustomerdetail?id=' + customerId;
+    return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
 }

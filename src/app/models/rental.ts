@@ -1,5 +1,10 @@
 export interface Rental {
   id: number;
+  carId:number;
+  customerId:number
+  rentDate:Date;
+  returnDate:Date;
+  
   brandName: string;
   colorName: string;
   modelYear: number;
@@ -9,4 +14,5 @@ export interface Rental {
   lastName: string;
   email: string;
   companyName: string;
+
 }

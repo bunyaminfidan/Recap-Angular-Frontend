@@ -5,7 +5,8 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": true,    
+    "strictNullChecks": false, //biz ekledik tip güvenliği vs
     "strictPropertyInitialization": false, // 2564 ts biz ekledik.
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

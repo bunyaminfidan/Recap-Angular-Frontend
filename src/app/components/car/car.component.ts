@@ -56,8 +56,6 @@ export class CarComponent implements OnInit {
   }
 
   getByFilterCars(brandId: number, colorId: number) {
-    console.log('getByFilterCars');
-    console.log('brand:' + brandId + ' color: ' + colorId);
     this.carService.getByFilterCars(brandId, colorId).subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;

@@ -17,7 +17,7 @@ export class RentalComponent implements OnInit {
   }
 
   getRentals() {
-    this.rentalService.getRentals().subscribe((response) => {
+    this.rentalService.getRental().subscribe((response) => {
       this.rentals = response.data;
       this.dataLoaded = true;
     });
