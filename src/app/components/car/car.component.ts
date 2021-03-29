@@ -63,7 +63,6 @@ export class CarComponent implements OnInit {
   }
 
   imageIsNullCheck(imagePath: string[]) {
-    // "{{ basePath }}{{ car.imagePath[0] }}"
     if (imagePath.length > 0) {
       return this.basePath + imagePath[0];
     } else {

@@ -22,17 +22,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let rental of rentals">
-      <td scope="row">{{ rental.id }}</td>
-      <td scope="row">{{ rental.firstName }}</td>
-      <td scope="row">{{ rental.lastName }}</td>
-      <td scope="row">{{ rental.companyName }}</td>
-      <td scope="row">{{ rental.email }}</td>
-      <td scope="row">{{ rental.brandName }}</td>
-      <td scope="row">{{ rental.colorName }}</td>
-      <td scope="row">{{ rental.modelYear }}</td>
-      <td scope="row">{{ rental.companyName }}</td>
-      <td scope="row">{{ rental.dailyPrice }}</td>
+    <tr *ngFor="let rentalDetail of rentalDetails">
+      <td scope="row">{{ rentalDetail.id }}</td>
+      <td scope="row">{{ rentalDetail.firstName }}</td>
+      <td scope="row">{{ rentalDetail.lastName }}</td>
+      <td scope="row">{{ rentalDetail.companyName }}</td>
+      <td scope="row">{{ rentalDetail.email }}</td>
+      <td scope="row">{{ rentalDetail.brandName }}</td>
+      <td scope="row">{{ rentalDetail.colorName }}</td>
+      <td scope="row">{{ rentalDetail.modelYear }}</td>
+      <td scope="row">{{ rentalDetail.companyName }}</td>
+      <td scope="row">{{ rentalDetail.dailyPrice }}</td>
     </tr>
   </tbody>
 </table>

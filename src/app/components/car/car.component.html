@@ -25,7 +25,7 @@
   <app-car-filter></app-car-filter>
 
   <div class="row" *ngIf="dataLoaded == true">
-    <div class="card" *ngFor="let car of cars" style="width: 18rem">
+    <div class="card" *ngFor="let car of cars | filterPipe:filterText" style="width: 18rem">
       <img
         [src]="imageIsNullCheck(car.imagePath)"
         style="height: 150px"

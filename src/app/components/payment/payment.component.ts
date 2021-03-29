@@ -35,14 +35,13 @@ export class PaymentComponent implements OnInit {
     private router: Router,
     private toastrService: ToastrService,
     private rentalService: RentalService,
-    private fakeCardService: FakeCardService,
+    private fakeCardService: FakeCardService
   ) {}
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params) => {
       if (params['rental']) {
         this.rental = JSON.parse(params['rental']);
-
         this.getCustomerId = JSON.parse(params['rental']).customerId;
         this.getCustomerDetailById(this.getCustomerId);
         this.getCarDetail();
@@ -53,7 +52,6 @@ export class PaymentComponent implements OnInit {
   getCustomerDetailById(customerId: number) {
     this.customerService.getCustomerById(customerId).subscribe((response) => {
       this.customer = response.data[0];
-      console.log(response);
     });
   }
 

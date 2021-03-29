@@ -16,7 +16,7 @@ import { Car } from 'src/app/models/car';
 })
 export class RentalCarComponent implements OnInit {
   customers: Customer[];
-  carDetails: Car;
+  carDetails: Car
   dataLoaded = false;
 
   customerId: number;
@@ -40,9 +40,9 @@ export class RentalCarComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getByIdCarDetail(params['carId']);
-        console.log(params['carId']);
+      
       } else {
-        console.log('else çalıştı.');
+        console.log('this.getByIdCarDetail(params(carId):  else çalıştı.');
       }
     });
 
@@ -51,7 +51,7 @@ export class RentalCarComponent implements OnInit {
 
   getByIdCarDetail(carId: number) {
     this.carService.getByIdCarDetail(carId).subscribe((response) => {
-      this.carDetails = response.data[0];
+     this.carDetails = response.data[0]
       this.dataLoaded = true;
     });
   }
@@ -65,7 +65,6 @@ export class RentalCarComponent implements OnInit {
 
   createRental() {
     let MyRental: Rental = {
-      // id: this.carDetails.id,ice,
       rentDate: this.rentDate,
       returnDate: this.returnDate,
       customerId: this.customerId,
