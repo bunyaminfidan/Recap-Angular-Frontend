@@ -93,22 +93,20 @@ export class PaymentComponent implements OnInit {
     };
     this.cardExist = await this.isCardExist(fakeCard);
     console.log(this.cardExist);
-    console.log('0');
     if (this.cardExist) {
-      console.log('1');
       this.fakeCard = await this.getFakeCardByCardNumber(this.cardNumber);
-      console.log('2');
       if (this.fakeCard.moneyInTheCard >= this.amountOfPayment) {
-        console.log('3');
         this.fakeCard.moneyInTheCard =
           this.fakeCard.moneyInTheCard - this.amountOfPayment;
-        console.log('4');
         this.updateCard(fakeCard);
-        console.log('5');
-        this.rentalService.addRental(this.rental);
-        console.log('6');
-        this.toastrService.success('Arabayı kiraladınız', 'Işlem başarılı');
-        console.log('7');
+
+        this.rentalService.addRental(this.rental).subscribe((response) => {
+          if (response.success) {
+            this.toastrService.success(response.message, 'Işlem başarılı');
+          } else {
+            this.toastrService.error('Kiralama işlemi hatalı', 'Hata');
+          }
+        });
       } else {
         this.toastrService.error(
           'Kartınızda yeterli para bulunmamaktadır',

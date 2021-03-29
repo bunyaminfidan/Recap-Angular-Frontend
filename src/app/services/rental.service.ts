@@ -32,9 +32,9 @@ export class RentalService {
     });
   }
 
-  addRental(rental: Rental) {
+  addRental(rental: Rental):Observable<ResponseModel> {
     let newPath = this.apiUrl + 'rentals/add';
-    this.httpClient.post(newPath, rental).subscribe();
+    return this.httpClient.post<ResponseModel>(newPath, rental)
     
   }
 }
