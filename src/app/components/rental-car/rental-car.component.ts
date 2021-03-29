@@ -5,8 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
 import { CustomerService } from 'src/app/services/customer.service';
-import { CarDetail } from 'src/app/models/carDetail';
-import { CarDetailService } from 'src/app/services/car-detail.service';
+import { CarService } from 'src/app/services/car.service';
+import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-rental-car',
@@ -16,7 +16,7 @@ import { CarDetailService } from 'src/app/services/car-detail.service';
 })
 export class RentalCarComponent implements OnInit {
   customers: Customer[];
-  carDetails: CarDetail;
+  carDetails: Car;
   dataLoaded = false;
 
   customerId: number;
@@ -29,7 +29,7 @@ export class RentalCarComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private carDetailService: CarDetailService,
+    private carService:CarService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private toastrService: ToastrService,
@@ -40,7 +40,6 @@ export class RentalCarComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getByIdCarDetail(params['carId']);
-
         console.log(params['carId']);
       } else {
         console.log('else çalıştı.');
@@ -51,7 +50,7 @@ export class RentalCarComponent implements OnInit {
   }
 
   getByIdCarDetail(carId: number) {
-    this.carDetailService.getByIdCarDetail(carId).subscribe((response) => {
+    this.carService.getByIdCarDetail(carId).subscribe((response) => {
       this.carDetails = response.data[0];
       this.dataLoaded = true;
     });
@@ -66,20 +65,11 @@ export class RentalCarComponent implements OnInit {
 
   createRental() {
     let MyRental: Rental = {
-      id: this.carDetails.id,
-      brandName: this.carDetails.brandName,
-      colorName: this.carDetails.colorName,
-      modelYear: this.carDetails.modelYear,
-      dailyPrice: this.carDetails.dailyPrice,
-      description: this.carDetails.description,
+      // id: this.carDetails.id,ice,
       rentDate: this.rentDate,
       returnDate: this.returnDate,
       customerId: this.customerId,
       carId: this.carDetails.id,
-      companyName: '',
-      email: '',
-      firstName: '',
-      lastName: '',
     };
     if (MyRental.customerId == undefined || MyRental.rentDate == undefined) {
       this.toastrService.error(

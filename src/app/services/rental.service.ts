@@ -13,9 +13,6 @@ export class RentalService {
 
   constructor(private httpClient: HttpClient) {}
 
-
-
-  
   getRental(): Observable<ListResponseModel<Rental>> {
     let newPath = this.apiUrl + 'rentals/getalldetail';
     return this.httpClient.get<ListResponseModel<Rental>>(newPath);
@@ -28,11 +25,15 @@ export class RentalService {
 
   payRental(rental: Rental, amount: number) {
     let newPath = this.apiUrl + 'rentals/add';
-    return this.httpClient.post<ResponseModel>(newPath,{payment:{amount:amount},rental:{rental}});
+    return this.httpClient.post<ResponseModel>(newPath, {
+      payment: { amount: amount },
+      rental: { rental },
+    });
   }
 
-  addRental(rental:Rental){
-    let newPath = this.apiUrl + "rentals/add"
-    this.httpClient.post(newPath,rental).subscribe()
+  addRental(rental: Rental) {
+    let newPath = this.apiUrl + 'rentals/add';
+    this.httpClient.post(newPath, rental).subscribe();
+    
   }
 }

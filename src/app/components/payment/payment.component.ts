@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CarDetail } from 'src/app/models/carDetail';
+import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
 import { FakeCard } from 'src/app/models/fakeCard';
 import { Rental } from 'src/app/models/rental';
-import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { FakeCardService } from 'src/app/services/fake-card.service';
@@ -18,7 +17,7 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class PaymentComponent implements OnInit {
   rental: Rental;
-  cars: CarDetail;
+  cars: Car;
   customer: Customer;
   getCustomerId: number;
   amountOfPayment: number = 0;
@@ -37,13 +36,13 @@ export class PaymentComponent implements OnInit {
     private toastrService: ToastrService,
     private rentalService: RentalService,
     private fakeCardService: FakeCardService,
-    private carDetailService: CarDetailService
   ) {}
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params) => {
       if (params['rental']) {
         this.rental = JSON.parse(params['rental']);
+
         this.getCustomerId = JSON.parse(params['rental']).customerId;
         this.getCustomerDetailById(this.getCustomerId);
         this.getCarDetail();
@@ -59,7 +58,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getCarDetail() {
-    this.carDetailService
+    this.carService
       .getByIdCarDetail(this.rental.carId)
       .subscribe((response) => {
         this.cars = response.data[0];
@@ -90,19 +89,28 @@ export class PaymentComponent implements OnInit {
   async rentACar() {
     let fakeCard: FakeCard = {
       nameOnTheCard: this.nameOnTheCard,
-      cardNumber: this.cardNumber,
+      number: this.cardNumber,
       expirationDate: this.expirationDate,
-      cardCvv: this.cardCvv,
+      cvv: this.cardCvv,
     };
     this.cardExist = await this.isCardExist(fakeCard);
+    console.log(this.cardExist);
+    console.log('0');
     if (this.cardExist) {
+      console.log('1');
       this.fakeCard = await this.getFakeCardByCardNumber(this.cardNumber);
+      console.log('2');
       if (this.fakeCard.moneyInTheCard >= this.amountOfPayment) {
+        console.log('3');
         this.fakeCard.moneyInTheCard =
           this.fakeCard.moneyInTheCard - this.amountOfPayment;
+        console.log('4');
         this.updateCard(fakeCard);
+        console.log('5');
         this.rentalService.addRental(this.rental);
+        console.log('6');
         this.toastrService.success('Arabayı kiraladınız', 'Işlem başarılı');
+        console.log('7');
       } else {
         this.toastrService.error(
           'Kartınızda yeterli para bulunmamaktadır',

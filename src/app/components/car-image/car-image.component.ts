@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CarImage } from 'src/app/models/carImage';
-import { CarImageService } from 'src/app/services/car-image.service';
+import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,7 +15,7 @@ export class CarImageComponent implements OnInit {
   basePath = environment.baseURL;
 
   constructor(
-    private carImageService: CarImageService,
+    private carService: CarService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -30,7 +30,7 @@ export class CarImageComponent implements OnInit {
   }
 
   getByIdCarImages(carId: number) {
-    this.carImageService.getByIdCarImages(carId).subscribe((response) => {
+    this.carService.getByIdCarImages(carId).subscribe((response) => {
       this.carImages = response.data;
       this.dataLoaded = true;
     });

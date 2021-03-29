@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CarDetail } from 'src/app/models/carDetail';
+import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
-import { CarDetailService } from 'src/app/services/car-detail.service';
-import { CarImageService } from 'src/app/services/car-image.service';
+import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,14 +11,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  carDetails: CarDetail[] = [];
+  carDetails: Car[] = [];
   carImages: CarImage[] = [];
   dataLoaded: boolean = false;
   basePath = environment.baseURL;
 
   constructor(
-    private carDetailService: CarDetailService,
-    private carImageService: CarImageService,
+    private carService: CarService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -36,7 +34,7 @@ export class CarDetailComponent implements OnInit {
   }
 
   getByIdCarDetail(carId: number) {
-    this.carDetailService.getByIdCarDetail(carId).subscribe((response) => {
+    this.carService.getByIdCarDetail(carId).subscribe((response) => {
       this.carDetails = response.data;
       this.dataLoaded = true;
     });
