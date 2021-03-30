@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Car } from 'src/app/models/car';
+import { CarDetail } from 'src/app/models/carDetail';
 import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
 
@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./car.component.css'],
 })
 export class CarComponent implements OnInit {
-  cars: Car[] = [];
+  carDetails: CarDetail[] = [];
   dataLoaded: boolean = false;
   basePath = environment.baseURL;
   defaultImages = environment.defaultImages;
@@ -36,28 +36,28 @@ export class CarComponent implements OnInit {
   }
   getCars() {
     this.carService.getCars().subscribe((response) => {
-      this.cars = response.data;
+      this.carDetails = response.data;
       this.dataLoaded = true;
     });
   }
 
   getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrands(brandId).subscribe((response) => {
-      this.cars = response.data;
+      this.carDetails = response.data;
       this.dataLoaded = true;
     });
   }
 
   getCarsByColor(colorId: number) {
     this.carService.getCarsByColors(colorId).subscribe((response) => {
-      this.cars = response.data;
+      this.carDetails = response.data;
       this.dataLoaded = true;
     });
   }
 
   getByFilterCars(brandId: number, colorId: number) {
     this.carService.getByFilterCars(brandId, colorId).subscribe((response) => {
-      this.cars = response.data;
+      this.carDetails = response.data;
       this.dataLoaded = true;
     });
   }

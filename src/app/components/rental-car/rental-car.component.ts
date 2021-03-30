@@ -6,7 +6,7 @@ import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
 import { CustomerService } from 'src/app/services/customer.service';
 import { CarService } from 'src/app/services/car.service';
-import { Car } from 'src/app/models/car';
+import { CarDetail } from 'src/app/models/carDetail';
 
 @Component({
   selector: 'app-rental-car',
@@ -16,7 +16,7 @@ import { Car } from 'src/app/models/car';
 })
 export class RentalCarComponent implements OnInit {
   customers: Customer[];
-  carDetails: Car
+  carDetails: CarDetail
   dataLoaded = false;
 
   customerId: number;

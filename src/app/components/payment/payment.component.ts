@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Car } from 'src/app/models/car';
+import { CarDetail } from 'src/app/models/carDetail';
 import { Customer } from 'src/app/models/customer';
 import { FakeCard } from 'src/app/models/fakeCard';
 import { Rental } from 'src/app/models/rental';
@@ -17,7 +17,7 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class PaymentComponent implements OnInit {
   rental: Rental;
-  cars: Car;
+  carDetails: CarDetail;
   customer: Customer;
   getCustomerId: number;
   amountOfPayment: number = 0;
@@ -59,7 +59,7 @@ export class PaymentComponent implements OnInit {
     this.carService
       .getByIdCarDetail(this.rental.carId)
       .subscribe((response) => {
-        this.cars = response.data[0];
+        this.carDetails = response.data[0];
         this.paymentCalculator();
       });
   }
@@ -73,7 +73,7 @@ export class PaymentComponent implements OnInit {
       //zamanFark değişkeni ile elde edilen saati güne çevirmek için aşağıdaki yöntem kullanılabilir.
       var numberOfDays = Math.ceil(difference / (1000 * 3600 * 24));
 
-      this.amountOfPayment = numberOfDays * this.cars.dailyPrice;
+      this.amountOfPayment = numberOfDays * this.carDetails.dailyPrice;
       if (this.amountOfPayment <= 0) {
         this.router.navigate(['/cars']);
         this.toastrService.error(

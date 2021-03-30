@@ -1,50 +1,58 @@
-<div class="row mb-2">
-  <div class="col col-4">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header"><h5 class="title">Filtele</h5></div>
+    <div class="card-body">
+      <div class="col col-12">
+        <select [(ngModel)]="brandIdFilter" class="form-select">
+          <!-- <option selected>Araba Markası Seçin</option> -->
+          <option
+            *ngFor="let brand of brands"
+            [value]="brand.id"
+            [selected]="getSelectedBrand(brand.id)"
+          >
+            {{ brand.brandName }}
+          </option>
+        </select>
+      </div>
 
-    <select [(ngModel)]="brandIdFilter" class="form-select">
-      <!-- <option selected>Araba Markası Seçin</option> -->
-      <option
-        *ngFor="let brand of brands"
-        [value]="brand.id"
-        [selected]="getSelectedBrand(brand.id)"
-      >
-        {{ brand.brandName }}
-      </option>
-    </select>
-  </div>
+      <hr />
 
-  <div class="col col-4">
-    <select [(ngModel)]="colorIdFilter" class="form-select">
-      <!-- <option selected>Araba Rengini Seçin</option> -->
+      <div class="col col-12">
+        <select [(ngModel)]="colorIdFilter" class="form-select">
+          <!-- <option selected>Araba Rengini Seçin</option> -->
 
-      <option
-        *ngFor="let color of colors"
-        [value]="color.id"
-        [selected]="getSelectedColor(color.id)"
-      >
-        {{ color.colorName }}
-      </option>
-    </select>
-  </div>
-
-  <div class="col col-2">
-    <div class="btn-group">
-      <button
-        routerLink="/cars/filter/{{ brandIdFilter }}/{{ colorIdFilter }}"
-        type="button"
-        class="btn btn-warning"
-      >
-        Filtrele
-      </button>
+          <option
+            *ngFor="let color of colors"
+            [value]="color.id"
+            [selected]="getSelectedColor(color.id)"
+          >
+            {{ color.colorName }}
+          </option>
+        </select>
+      </div>
+      <hr />
     </div>
-  </div>
 
-  <div class="col col-2">
-    <div class="btn-group">
-      <button routerLink="/cars" type="button" class="btn btn-danger">
-        Temizle
-      </button>
+    <div class="card-footer">
+      <div class="d-grid gap-2 col-12 mx-auto">
+        <button
+          routerLink="/cars/filter/{{ brandIdFilter }}/{{ colorIdFilter }}"
+          type="button"
+          class="btn btn-outline-primary"
+        >
+          Filtrele
+        </button>
+
+        <div class="btn-group">
+          <button
+            routerLink="/cars"
+            type="button"
+            class="btn btn-outline-danger"
+          >
+            Temizle
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-

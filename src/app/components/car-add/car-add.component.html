@@ -1,0 +1,95 @@
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Araba ekle</h5></div>
+      <div class="card-body">
+        <form [formGroup]="carAddForm">
+          <div class="mb-3">
+            <label for="description">Detaylı Açıklama</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="description"
+                formControlName="description"
+                class="form-control"
+                placeholder="Araba açıklaması"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="brandId">Marka</label>
+            <div class="form-group">
+              <select
+                id="brandName"
+                formControlName="brandId"
+                class="form-select"
+              >
+                <option selected>Marka Seçiniz</option>
+                <option
+                  *ngFor="let brand of brands"
+                  [ngValue]="brand.id"
+                  type="number"
+                  class="form-control"
+                >
+                  {{ brand.brandName }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="colorId">Renk</label>
+            <div class="form-group">
+              <select
+                id="colorId"
+                formControlName="colorId"
+                class="form-select"
+              >
+                <option selected>Renk Seçiniz</option>
+                <option
+                  type="number"
+                  *ngFor="let color of colors"
+                  [ngValue]="color.id"
+                  class="form-control"
+                >
+                  {{ color.colorName }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="modelYear">Model</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="modelYear"
+                formControlName="modelYear"
+                class="form-control"
+                placeholder="Model"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="dailyPrice">Fiyatı</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="dailyPrice"
+                formControlName="dailyPrice"
+                class="form-control"
+                placeholder="Fiyat"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+      </div>
+    </div>
+  </div>
+</div>

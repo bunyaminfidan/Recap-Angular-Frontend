@@ -22,25 +22,24 @@
     {{ filterText }} aradınız
   </div>
 
-  <app-car-filter></app-car-filter>
 
   <div class="row" *ngIf="dataLoaded == true">
-    <div class="card" *ngFor="let car of cars | filterPipe:filterText" style="width: 18rem">
+    <div class="card" *ngFor="let carDetail of carDetails | filterPipe:filterText" style="width: 18rem">
       <img
-        [src]="imageIsNullCheck(car.imagePath)"
+        [src]="imageIsNullCheck(carDetail.imagePath)"
         style="height: 150px"
-        routerLink="/cars/carDetail/{{ car.id }}"
+        routerLink="/cars/carDetail/{{ carDetail.id }}"
         class="img-fluid img-thumbnail"
       />
       <div class="card-body">
-        <h5 class="card-title">{{ car.description }}</h5>
+        <h5 class="card-title">{{ carDetail.description }}</h5>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Marka: {{ car.brandName }}</li>
-        <li class="list-group-item">Model: {{ car.modelYear }}</li>
+        <li class="list-group-item">Marka: {{ carDetail.brandName }}</li>
+        <li class="list-group-item">Model: {{ carDetail.modelYear }}</li>
         <li class="list-group-item">
           Günlük Fiyat:
-          {{ car.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2" }}
+          {{ carDetail.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2" }}
         </li>
       </ul>
       <div class="card-body">
@@ -48,7 +47,7 @@
           <button
             type="button"
             class="btn btn-secondary"
-            routerLink="/cars/carDetail/{{ car.id }}"
+            routerLink="/cars/carDetail/{{ carDetail.id }}"
           >
             İncele
           </button>
