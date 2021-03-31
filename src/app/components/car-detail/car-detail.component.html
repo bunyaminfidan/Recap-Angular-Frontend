@@ -29,5 +29,18 @@
   </table>
 
   <app-car-image></app-car-image>
+
+  <div *ngFor="let carDetail of carDetails">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button
+        class="btn btn-outline-secondary me-md-2 mb-2"
+        type="button"
+        routerLink="/cars/add/{{ carDetail.id }}"
+      >
+        Düzenle
+      </button>
+    </div>
+  </div>
+
   <app-rental-car></app-rental-car>
 </div>

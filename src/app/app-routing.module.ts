@@ -21,7 +21,9 @@ const routes: Routes = [
   { path: 'cars/filter/:brandId/', component: CarComponent },
   { path: 'cars/filter/:brandId/:colorId', component: CarComponent },
 
+  { path: 'cars/add/:carId', component: CarAddComponent },
   { path: 'cars/add', component: CarAddComponent },
+
 
   { path: 'rentals', component: RentalComponent },
   { path: 'payment/:rental', component: PaymentComponent },
