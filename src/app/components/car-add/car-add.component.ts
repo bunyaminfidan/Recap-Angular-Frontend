@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
@@ -12,6 +13,9 @@ import {
   Validator,
   Validators,
 } from '@angular/forms';
+import { CarDetail } from 'src/app/models/carDetail';
+import { Car } from 'src/app/models/car';
+
 //FormBuilder servis html de ki form ile .ts arasında bağlantı kuruyor.
 
 @Component({
@@ -22,10 +26,13 @@ import {
 export class CarAddComponent implements OnInit {
   colors: Color[] = [];
   brands: Brand[] = [];
+  cars: Car;
+  dataLoaded: boolean = false;
 
   carAddForm: FormGroup;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private colorService: ColorService,
     private brandService: BrandService,
     private carService: CarService,
@@ -34,20 +41,28 @@ export class CarAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createCarAddForm();
     this.getBrands();
     this.getColors();
+
+    this.createCarAddForm();
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['carId']) {
+        this.getByIdCar(params['carId']);
+        console.log(params['carId']);
+      } else {
+        console.log('else çalıştı.');
+      }
+    });
   }
 
   createCarAddForm() {
     this.carAddForm = this.formBuilder.group({
-      brandId: ['', Validators.required],
-      colorId: ['', Validators.required],
-      modelYear: ['', Validators.required],
-      dailyPrice: ['', Validators.required],
-      description: ['', Validators.required],
      
-      
+      brandId: [this.cars.id, Validators.required],
+      colorId: [this.cars.colorId, Validators.required],
+      modelYear: [this.cars.modelYear, Validators.required],
+      dailyPrice: [this.cars.dailyPrice, Validators.required],
+      description: [this.cars.description, Validators.required],
     });
   }
 
@@ -62,7 +77,16 @@ export class CarAddComponent implements OnInit {
       this.colors = response.data;
     });
   }
-  
+
+  getByIdCar(carId: number) {
+    this.carService.getByIdCar(carId).subscribe((response) => {
+      this.cars = response.data[0];
+      console.log(this.cars);
+
+      this.dataLoaded = true;
+    });
+  }
+
   add() {
     console.log(this.carAddForm.value);
     if (this.carAddForm.valid) {
