@@ -15,11 +15,12 @@ export class CarService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getCars(): Observable<ListResponseModel<CarDetail>> {
+  getCarsDetails(): Observable<ListResponseModel<CarDetail>> {
     // return this.httpClient.get<ListResponseModel<Car>>(this.apiUrl);
     let newPath = this.apiUrl + 'cars/getalldetail';
     return this.httpClient.get<ListResponseModel<CarDetail>>(newPath);
   }
+
 
   getCarsByBrands(brandId: number): Observable<ListResponseModel<CarDetail>> {
     // return this.httpClient.get<ListResponseModel<Car>>(this.apiUrl);
@@ -61,12 +62,24 @@ export class CarService {
   getByIdCar(carId: number): Observable<ListResponseModel<Car>> {
     // return this.httpClient.get<ListResponseModel<Car>>(this.apiUrl);
     let newPath = this.apiUrl + 'cars/getbyid?id=' + carId;
-    return this.httpClient.get<ListResponseModel<Car>>(newPath)
-    
+    return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   add(car: Car): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + 'cars/add', car);
+  }
 
+  update(car: Car): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(
+      this.apiUrl + 'cars/update',
+      car
+    );
+  }
+
+  delete(car: Car): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(
+      this.apiUrl + 'cars/delete',
+      car
+    );
   }
 }

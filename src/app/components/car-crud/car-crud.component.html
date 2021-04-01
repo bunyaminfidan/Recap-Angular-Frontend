@@ -4,7 +4,6 @@
       <div class="card-header"><h5 class="title">Araba ekle</h5></div>
       <div class="card-body">
         <form [formGroup]="carAddForm">
-
           <div class="mb-3">
             <label for="description">Detaylı Açıklama</label>
             <div class="form-group">
@@ -88,8 +87,12 @@
         </form>
       </div>
 
-      <div class="card-footer">
-        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+      <div class="card-footer ">
+        <button class="btn btn-outline-primary me-md-3" (click)="addorUpdateClick()">
+          {{ addOrUpdateButtonText() }}
+        </button>
+
+        <button type="button" class="btn btn-outline-danger " (click)="delete()">Arabay Sil</button>
       </div>
     </div>
   </div>

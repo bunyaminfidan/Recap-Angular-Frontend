@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BrandAddComponent } from './components/brand-add/brand-add.component';
-import { CarAddComponent } from './components/car-add/car-add.component';
+import { BrandCrudComponent } from './components/brand-crud/brand-crud.component';
+import { CarCrudComponent } from './components/car-crud/car-crud.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
-import { ColorAddComponent } from './components/color-add/color-add.component';
+import { ColorCrudComponent } from './components/color-crud/color-crud.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { RentalComponent } from './components/rental/rental.component';
+import { SettingComponent } from './components/setting/setting.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarComponent },
@@ -16,20 +17,24 @@ const routes: Routes = [
   { path: 'cars/color/:colorId', component: CarComponent },
   { path: 'cars/carDetail/:carId', component: CarDetailComponent },
   { path: 'cars/carImages/:carId', component: CarImageComponent },
-  
+
   { path: 'cars/filter/:colorId', component: CarComponent },
   { path: 'cars/filter/:brandId/', component: CarComponent },
   { path: 'cars/filter/:brandId/:colorId', component: CarComponent },
 
-  { path: 'cars/add/:carId', component: CarAddComponent },
-  { path: 'cars/add', component: CarAddComponent },
+  { path: 'cars/add/:carId', component: CarCrudComponent },
+  { path: 'cars/add', component: CarCrudComponent },
 
+  { path: 'brands/add', component: BrandCrudComponent },
+  { path: 'brands/add/:brandId', component: BrandCrudComponent },
+
+  { path: 'colors/add', component: ColorCrudComponent },
+  { path: 'colors/add/:colorId', component: ColorCrudComponent },
 
   { path: 'rentals', component: RentalComponent },
   { path: 'payment/:rental', component: PaymentComponent },
 
-  { path: 'brands/add', component: BrandAddComponent },
-  { path: 'colors/add', component: ColorAddComponent },
+  { path: 'setting', component: SettingComponent },
 ];
 
 @NgModule({

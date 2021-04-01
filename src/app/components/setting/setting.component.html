@@ -1,0 +1,24 @@
+<div class="content">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <div class="card">
+          <div class="card-body">MARKA</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <select
+          class="form-select"
+          size="10"
+          aria-label="size 3 select example"
+        >
+          <option selected>Open this select menu</option>
+
+          <option *ngFor="let brand of brands" [ngValue]="brand.id">
+            {{ brand.brandName }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

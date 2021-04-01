@@ -19,7 +19,15 @@
         </form>
       </div>
       <div class="card-footer">
-        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+        <button
+          class="btn btn-outline-primary me-md-3"
+          (click)="addorUpdateClick()"
+        >
+          {{ addOrUpdateButtonText() }}
+        </button>
+        <button type="button" class="btn btn-outline-danger" (click)="delete()">
+          Arabay Sil
+        </button>
       </div>
     </div>
   </div>
