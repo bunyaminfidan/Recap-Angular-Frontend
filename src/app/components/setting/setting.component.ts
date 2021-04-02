@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
@@ -22,6 +22,8 @@ export class SettingComponent implements OnInit {
   brands: Brand[] = [];
   dataLoaded: boolean;
 
+  currentBrand: Brand;
+  currentColor: Color;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,5 +52,34 @@ export class SettingComponent implements OnInit {
     this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
     });
+  }
+
+  // colorUpdate() {
+  //   let updateColor: Color = {
+  //     id: this.colors.id,
+  //     colorName: this.colors.colorName,
+
+  //   };
+  //   if (updateColor.id == undefined || updateColor.colorName == undefined) {
+  //     this.toastrService.error("Eksik bilgi girdiniz","Bilgilerinizi kontrol edin")
+  //   } else{
+  //     this.router.navigate(['/color/add/', JSON.stringify(updateColor)]);
+  //     this.toastrService.info(
+  //       'Ödeme sayfasına yönlendiriliyorsunuz...',
+  //       'Ödeme İşlemleri'
+  //     );
+  //   }
+  // }
+
+  getSelectedBrand(id: number) {
+    let filter = this.brands.filter((b) => b.id == id);
+    this.currentBrand = filter[0];
+    console.log(this.currentBrand);
+  }
+
+  getSelectedColor(id: number) {
+    let filter = this.colors.filter((c) => c.id == id);
+    this.currentColor = filter[0];
+    console.log(this.currentColor);
   }
 }

@@ -21,7 +21,6 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { CarFilterComponent } from './components/car-filter/car-filter.component';
 import { RentalCarComponent } from './components/rental-car/rental-car.component';
 import { PaymentComponent } from './components/payment/payment.component';
-import { ColorAddComponent } from './components/color-add/color-add.component';
 import { CarCrudComponent } from './components/car-crud/car-crud.component';
 import { BrandCrudComponent } from './components/brand-crud/brand-crud.component';
 import { ColorCrudComponent } from './components/color-crud/color-crud.component';
@@ -45,7 +44,6 @@ import { SettingComponent } from './components/setting/setting.component';
     CarFilterComponent,
     RentalCarComponent,
     PaymentComponent,
-    ColorAddComponent,
     CarCrudComponent,
     BrandCrudComponent,
     ColorCrudComponent,

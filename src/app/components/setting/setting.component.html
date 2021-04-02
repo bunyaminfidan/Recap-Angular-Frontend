@@ -1,24 +1,111 @@
 <div class="content">
-  <div class="col-md-3">
-    <div class="card">
-      <div class="card-header">
-        <div class="card">
-          <div class="card-body">MARKA</div>
-        </div>
-      </div>
+  <div class="col-md-4">
+    <div class="card border-info mb-3" style="max-width: 18rem">
+      <div class="card-header">MARKA</div>
+      <h5 class="card-title"></h5>
       <div class="card-body">
-        <select
-          class="form-select"
-          size="10"
-          aria-label="size 3 select example"
-        >
-          <option selected>Open this select menu</option>
-
-          <option *ngFor="let brand of brands" [ngValue]="brand.id">
+        <select class="form-select" size="5">
+          <option
+            *ngFor="let brand of brands"
+            (click)="getSelectedBrand(brand.id)"
+          >
             {{ brand.brandName }}
           </option>
         </select>
       </div>
+
+      <div class="card-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#brandModal"
+        >
+          Güncelle
+        </button>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="col-md-4">
+  <div class="card border-info mb-3" style="max-width: 18rem">
+    <div class="card-header">Renk</div>
+    <h5 class="card-title"></h5>
+    <div class="card-body">
+      <select class="form-select" size="5">
+        <option
+          *ngFor="let color of colors"
+          (click)="getSelectedColor(color.id)"
+        >
+          {{ color.colorName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="card-footer">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#colorModal"
+      >
+        Güncelle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Brand Modal -->
+<div
+  class="modal fade"
+  id="brandModal"
+  tabindex="-1"
+  aria-labelledby="brandModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="brandModalLabel">Marka</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-brand-crud [brands]="currentBrand"></app-brand-crud>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Brand Modal -->
+
+<!--Color Modal -->
+<div
+  class="modal fade"
+  id="colorModal"
+  tabindex="-1"
+  aria-labelledby="colorModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="colorModalLabel">Marka</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-brand-crud [brands]="currentBrand"></app-brand-crud>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Color Modal -->

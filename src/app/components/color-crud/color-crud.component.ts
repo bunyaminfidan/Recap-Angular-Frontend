@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +12,7 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ColorCrudComponent implements OnInit {
   colorAddForm: FormGroup;
-  colors: Color;
+  @Input()  colors: Color;
   dataLoaded: boolean;
   constructor(
     private formBuilder: FormBuilder,
@@ -42,8 +42,24 @@ export class ColorCrudComponent implements OnInit {
     if (this.colorAddForm.valid) {
       let colorModel = Object.assign({}, this.colorAddForm.value);
       this.colorService.add(colorModel).subscribe((response) => {
-        console.log(response);
+        
         this.toastrService.success('Araba rengi eklendi', 'Başarılı');
+      },
+      (responseError) => {
+        console.log(responseError);
+
+        if (responseError.error.ValidationErrors.length > 0) {
+          for (
+            let i = 0;
+            i < responseError.error.ValidationErrors.length;
+            i++
+          ) {
+            this.toastrService.error(
+              responseError.error.ValidationErrors[i].ErrorMessage,
+              'Doğrulama hatası'
+            );
+          }
+        }
       });
     } else {
       this.toastrService.error('Form bilgileri eksik', 'Dikkat');
@@ -57,6 +73,22 @@ export class ColorCrudComponent implements OnInit {
       brandModel.id = this.colors.id;
       this.colorService.update(brandModel).subscribe((response) => {
         this.toastrService.success('Renk güncellendi', 'Başarılı');
+      },
+      (responseError) => {
+        console.log(responseError);
+
+        if (responseError.error.ValidationErrors.length > 0) {
+          for (
+            let i = 0;
+            i < responseError.error.ValidationErrors.length;
+            i++
+          ) {
+            this.toastrService.error(
+              responseError.error.ValidationErrors[i].ErrorMessage,
+              'Doğrulama hatası'
+            );
+          }
+        }
       });
     } else {
       this.toastrService.error('Form bilgileri eksik', 'Dikkat');
@@ -103,4 +135,9 @@ export class ColorCrudComponent implements OnInit {
       console.log('add');
     }
   }
+
+  
+
+
+
 }

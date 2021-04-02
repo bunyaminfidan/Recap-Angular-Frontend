@@ -81,22 +81,59 @@ export class CarCrudComponent implements OnInit {
   add() {
     if (this.carAddForm.valid) {
       let carModel = Object.assign({}, this.carAddForm.value);
-      this.carService.add(carModel).subscribe((response) => {
-        this.toastrService.success('Araba eklendi', 'Başarılı');
-      });
+      this.carService.add(carModel).subscribe(
+        (response) => {
+          this.toastrService.success('Araba eklendi', 'Başarılı');
+        },
+        (responseError) => {
+          console.log(responseError);
+
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama hatası'
+              );
+            }
+          }
+        }
+      );
     } else {
       this.toastrService.error('Form bilgileri eksik', 'Dikkat');
     }
   }
 
   update() {
-    console.log(this.carAddForm.value);
     if (this.carAddForm.valid) {
       let carModel = Object.assign({}, this.carAddForm.value);
       carModel.id = this.cars.id;
-      this.carService.update(carModel).subscribe((response) => {
-        this.toastrService.success('Araba güncellendi', 'Başarılı');
-      });
+      this.carService.update(carModel).subscribe(
+        (response) => {
+    
+          this.toastrService.success('Araba güncellendi', 'Başarılı');
+        },
+        (responseError) => {
+          console.log(responseError);
+          console.log("responseError" );
+
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama hatası'
+              );
+            }
+          }
+        }
+      );
     } else {
       this.toastrService.error('Form bilgileri eksik', 'Dikkat');
     }

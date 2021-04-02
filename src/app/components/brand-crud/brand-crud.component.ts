@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,8 +12,10 @@ import { BrandService } from 'src/app/services/brand.service';
 })
 export class BrandCrudComponent implements OnInit {
   brandAddFrom: FormGroup;
-  brands: Brand;
+  @Input() brands: Brand;
+
   dataLoaded: boolean;
+
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
@@ -31,6 +33,14 @@ export class BrandCrudComponent implements OnInit {
     });
   }
 
+  ngOnChanges() {
+    this.brands
+      ? this.brandAddFrom.setValue({
+          brandName: this.brands.brandName,
+        })
+      : 'ss';
+  }
+
   createAddBrandForm() {
     this.brandAddFrom = this.formBuilder.group({
       brandName: ['', Validators.required],
@@ -41,10 +51,28 @@ export class BrandCrudComponent implements OnInit {
     console.log(this.brandAddFrom.value);
     if (this.brandAddFrom.valid) {
       let brandModel = Object.assign({}, this.brandAddFrom.value);
-      this.brandService.add(brandModel).subscribe((response) => {
-        console.log(response);
-        this.toastrService.success('Marka eklendi', 'Başarılı');
-      });
+      this.brandService.add(brandModel).subscribe(
+        (response) => {
+          console.log(response);
+          this.toastrService.success('Marka eklendi', 'Başarılı');
+        },
+        (responseError) => {
+          console.log(responseError);
+
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama hatası'
+              );
+            }
+          }
+        }
+      );
     } else {
       this.toastrService.error('Form bilgileri eksik', 'Dikkat');
     }
@@ -55,9 +83,27 @@ export class BrandCrudComponent implements OnInit {
     if (this.brandAddFrom.valid) {
       let brandModel = Object.assign({}, this.brandAddFrom.value);
       brandModel.id = this.brands.id;
-      this.brandService.update(brandModel).subscribe((response) => {
-        this.toastrService.success('Marka güncellendi', 'Başarılı');
-      });
+      this.brandService.update(brandModel).subscribe(
+        (response) => {
+          this.toastrService.success('Marka güncellendi', 'Başarılı');
+        },
+        (responseError) => {
+          console.log(responseError);
+
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama hatası'
+              );
+            }
+          }
+        }
+      );
     } else {
       this.toastrService.error('Form bilgileri eksik', 'Dikkat');
     }
