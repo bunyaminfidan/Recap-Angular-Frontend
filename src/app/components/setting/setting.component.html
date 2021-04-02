@@ -1,5 +1,5 @@
-<div class="content">
-  <div class="col-md-4">
+<div class="row">
+  <div class="col-sm-6">
     <div class="card border-info mb-3" style="max-width: 18rem">
       <div class="card-header">MARKA</div>
       <h5 class="card-title"></h5>
@@ -26,33 +26,34 @@
       </div>
     </div>
   </div>
-</div>
+  <div class="col-sm-6">
+    <div class="col-md-4"></div>
+      <div class="card border-info mb-3" style="max-width: 18rem">
+        <div class="card-header">Renk</div>
+        <h5 class="card-title"></h5>
+        <div class="card-body">
+          <select class="form-select" size="5">
+            <option
+              *ngFor="let color of colors"
+              (click)="getSelectedColor(color.id)"
+            >
+              {{ color.colorName }}
+            </option>
+          </select>
+        </div>
 
-<div class="col-md-4">
-  <div class="card border-info mb-3" style="max-width: 18rem">
-    <div class="card-header">Renk</div>
-    <h5 class="card-title"></h5>
-    <div class="card-body">
-      <select class="form-select" size="5">
-        <option
-          *ngFor="let color of colors"
-          (click)="getSelectedColor(color.id)"
-        >
-          {{ color.colorName }}
-        </option>
-      </select>
-    </div>
-
-    <div class="card-footer">
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#colorModal"
-      >
-        Güncelle
-      </button>
-    </div>
+        <div class="card-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#colorModal"
+          >
+            Güncelle
+          </button>
+        </div>
+      </div>
+   
   </div>
 </div>
 
@@ -103,9 +104,77 @@
         ></button>
       </div>
       <div class="modal-body">
-        <app-brand-crud [brands]="currentBrand"></app-brand-crud>
+        <app-color-crud [colors]="currentColor"></app-color-crud>
       </div>
     </div>
   </div>
 </div>
 <!--Color Modal -->
+
+<!--Car Modal -->
+<div
+  class="modal fade"
+  id="carModal"
+  tabindex="-1"
+  aria-labelledby="carModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="carModalLabel">Marka</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-car-crud [inputToCurrentCarId]="currentCarId"></app-car-crud>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Car Modal -->
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Marka</th>
+        <th>Renk</th>
+        <th>Model</th>
+        <th>Günlük Fiyat</th>
+        <th>Açıklama</th>
+        <th>
+          <button routerLink="add" type="button" class="btn btn-outline-dark">
+            + Ekle
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carDetail of carDetails">
+        <td>{{ carDetail.id }}</td>
+        <td>{{ carDetail.brandName }}</td>
+        <td>{{ carDetail.colorName }}</td>
+        <td>{{ carDetail.modelYear }}</td>
+        <td>{{ carDetail.dailyPrice }}</td>
+        <td>{{ carDetail.description }}</td>
+        <td>
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#carModal"
+            (click)="getSelectedCar(carDetail.id)"
+            type="button"
+            class="btn btn-outline-info mx-2"
+          >
+            Güncelle
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

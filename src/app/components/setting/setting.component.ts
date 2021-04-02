@@ -24,6 +24,7 @@ export class SettingComponent implements OnInit {
 
   currentBrand: Brand;
   currentColor: Color;
+  currentCarId: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,6 +37,8 @@ export class SettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBrands();
+    this.getColors();
+    this.getCars();
   }
   getCars() {
     this.carService.getCarsDetails().subscribe((response) => {
@@ -81,5 +84,10 @@ export class SettingComponent implements OnInit {
     let filter = this.colors.filter((c) => c.id == id);
     this.currentColor = filter[0];
     console.log(this.currentColor);
+  }
+
+  getSelectedCar(id: number) {
+    this.currentCarId = id;
+    console.log(this.currentCarId);
   }
 }

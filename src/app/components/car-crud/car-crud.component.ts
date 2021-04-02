@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Brand } from 'src/app/models/brand';
@@ -20,6 +20,7 @@ export class CarCrudComponent implements OnInit {
   cars: Car;
   dataLoaded: boolean = false;
   carAddForm: FormGroup;
+  @Input() inputToCurrentCarId: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,6 +41,19 @@ export class CarCrudComponent implements OnInit {
       }
     });
   }
+
+  ngOnChanges() {
+    this.isInputToCarIdEmpty();
+  }
+
+  isInputToCarIdEmpty() {
+    this.inputToCurrentCarId
+      ? this.getByIdCar(this.inputToCurrentCarId)
+      : '';
+  }
+
+
+
 
   createCarAddForm() {
     this.carAddForm = this.formBuilder.group({
@@ -113,12 +127,11 @@ export class CarCrudComponent implements OnInit {
       carModel.id = this.cars.id;
       this.carService.update(carModel).subscribe(
         (response) => {
-    
           this.toastrService.success('Araba güncellendi', 'Başarılı');
         },
         (responseError) => {
           console.log(responseError);
-          console.log("responseError" );
+          console.log('responseError');
 
           if (responseError.error.ValidationErrors.length > 0) {
             for (

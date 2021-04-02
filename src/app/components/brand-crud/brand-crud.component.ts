@@ -34,11 +34,15 @@ export class BrandCrudComponent implements OnInit {
   }
 
   ngOnChanges() {
+    this.isBrandEmpty();
+  }
+
+  isBrandEmpty() {
     this.brands
       ? this.brandAddFrom.setValue({
           brandName: this.brands.brandName,
         })
-      : 'ss';
+      : '';
   }
 
   createAddBrandForm() {

@@ -14,6 +14,7 @@ export class ColorCrudComponent implements OnInit {
   colorAddForm: FormGroup;
   @Input()  colors: Color;
   dataLoaded: boolean;
+
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
@@ -29,6 +30,18 @@ export class ColorCrudComponent implements OnInit {
         this.getByIdColor(params['colorId']);
       }
     });
+  }
+
+  ngOnChanges() {
+    this.isBrandEmpty();
+  }
+
+  isBrandEmpty() {
+    this.colors
+      ? this.colorAddForm.setValue({
+          colorName: this.colors.colorName,
+        })
+      : '';
   }
 
   createAddColorFrom() {
