@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; // api istek için http isteği için gerek
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; // api istek için http isteği için gerek
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms'; // ngModule kullanmak için. html de girilen texti alabilmek için.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -25,6 +25,9 @@ import { CarCrudComponent } from './components/car-crud/car-crud.component';
 import { BrandCrudComponent } from './components/brand-crud/brand-crud.component';
 import { ColorCrudComponent } from './components/color-crud/color-crud.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
 
 
 
@@ -48,6 +51,8 @@ import { SettingComponent } from './components/setting/setting.component';
     BrandCrudComponent,
     ColorCrudComponent,
     SettingComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,9 @@ import { SettingComponent } from './components/setting/setting.component';
       positionClass: 'toast-bottom-right',
     }), //Bildirim işlemleri için. Alertfy gibi
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
