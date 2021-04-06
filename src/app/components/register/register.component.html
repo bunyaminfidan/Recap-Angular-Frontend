@@ -1,52 +1,64 @@
-<div>
-  <div class="col-md-7 col-lg-8">
+<body class="text-center">
+  <main class="form-register">
     <h4 class="mb-3">Kayıt Ol</h4>
-    <form class="needs-validation" novalidate>
+    <form [formGroup]="registerForm">
       <div class="row g-3">
         <div class="col-sm-6">
-          <label for="firstName" class="form-label">Ad </label>
-          <input
-            type="text"
-            class="form-control"
-            id="firstName"
-            placeholder=""
-            value=""
-         
-          />
-     
+          <div class="form-floating mb-3">
+            <input
+              formControlName="firstName"
+              type="text"
+              class="form-control"
+              id="firstName"
+              placeholder="adınız"
+            />
+            <label for="firstName">Adınız</label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-floating mb-3">
+            <input
+              formControlName="lastName"
+              type="text"
+              class="form-control"
+              id="lastName"
+              placeholder="soyadınız"
+            />
+            <label for="lastName">Soyadınız</label>
+          </div>
         </div>
 
         <div class="col-sm-6">
-          <label for="lastName" class="form-label">Soyadı</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lastName"
-            placeholder=""
-            value=""
-            required
-          />
-  
+          <div class="form-floating mb-3">
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="name@example.com"
+            />
+            <label for="email">Email</label>
+          </div>
         </div>
 
-        <div class="col-12">
-          <label for="email" class="form-label"
-            >Email </label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            placeholder="siz@eposta.com"
-          />
-    
+        <div class="col-sm-6">
+          <div class="form-floating">
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="password"
+            />
+            <label for="password">Parola</label>
+          </div>
         </div>
       </div>
-    
-
       <hr class="my-4" />
 
-      <button class="w-100 btn btn-primary btn-xs">Kayıt Ol</button>
+      <button (click)="register()" class="w-25 btn btn-primary btn-xs">
+        Kayıt Ol
+      </button>
     </form>
-  </div>
-</div>
+  </main>
+</body>

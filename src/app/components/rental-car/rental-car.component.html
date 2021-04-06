@@ -52,11 +52,11 @@
           <div class="col-8">
             <select class="form-select" [(ngModel)]="customerId">
               <option
-                [ngValue]="customer.id"
-                *ngFor="let customer of customers"
+                [ngValue]="customerDetails.id"
+                *ngFor="let customerDetail of customerDetails"
               >
-                {{ customer.firstName }} {{ customer.lastName }} |
-                {{ customer.companyName }}
+                {{ customerDetail.firstName }} {{ customerDetail.lastName }} |
+                {{ customerDetail.companyName }}
               </option>
             </select>
           </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetail } from 'src/app/models/carDetail';
 import { Customer } from 'src/app/models/customer';
+import { CustomerDetail } from 'src/app/models/customerDetail';
 import { FakeCard } from 'src/app/models/fakeCard';
 import { Rental } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
@@ -18,7 +19,7 @@ import { RentalService } from 'src/app/services/rental.service';
 export class PaymentComponent implements OnInit {
   rental: Rental;
   carDetails: CarDetail;
-  customer: Customer;
+  customeDetails: CustomerDetail;
   getCustomerId: number;
   amountOfPayment: number = 0;
   nameOnTheCard: string;
@@ -51,7 +52,7 @@ export class PaymentComponent implements OnInit {
 
   getCustomerDetailById(customerId: number) {
     this.customerService.getCustomerById(customerId).subscribe((response) => {
-      this.customer = response.data[0];
+      this.customeDetails = response.data;
     });
   }
 

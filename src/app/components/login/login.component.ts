@@ -7,6 +7,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +22,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private autService: AuthService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private localStorage: LocalStorageService,
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -34,13 +41,15 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-
       let loginModel = Object.assign({}, this.loginForm.value);
       this.autService.loginModel(loginModel).subscribe(
         (response) => {
           this.toastrService.info('Giriş Yapıldı', 'Başarılı');
-          localStorage.setItem('token', response.data.token);
+          this.localStorage.saveToken(response.data.token);
+          this.localStorage.saveEmail(this.loginForm.value.email);
+
+          // this.localStorage.saveUserId(response.data.userId.toString());
+          this.router.navigate(['cars']);
         },
         (responseError) => {
           console.log(responseError);
@@ -48,7 +57,7 @@ export class LoginComponent implements OnInit {
         }
       );
     } else {
-      this.toastrService.error('OK');
+      this.toastrService.error('Form bilgileriniz eksik', 'Hata');
     }
   }
 }

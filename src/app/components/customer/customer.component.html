@@ -17,12 +17,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let customer of customers">
-      <td scope="row">{{ customer.id }}</td>
-      <td scope="row">{{ customer.firstName }}</td>
-      <td scope="row">{{ customer.lastName }}</td>
-      <td scope="row">{{ customer.email }}</td>
-      <td scope="row">{{ customer.companyName }}</td>
+    <tr *ngFor="let customerDetail of customerDetails">
+      <td scope="row">{{ customerDetail.id }}</td>
+      <td scope="row">{{ customerDetail.firstName }}</td>
+      <td scope="row">{{ customerDetail.lastName }}</td>
+      <td scope="row">{{ customerDetail.email }}</td>
+      <td scope="row">{{ customerDetail.companyName }}</td>
     </tr>
   </tbody>
 </table>

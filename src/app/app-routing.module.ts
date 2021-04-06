@@ -7,6 +7,7 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
 import { ColorCrudComponent } from './components/color-crud/color-crud.component';
 import { LoginComponent } from './components/login/login.component';
+import { NaviComponent } from './components/navi/navi.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentalComponent } from './components/rental/rental.component';
@@ -32,19 +33,40 @@ const routes: Routes = [
   },
   { path: 'cars/add', component: CarCrudComponent, canActivate: [LoginGuard] },
 
-  { path: 'brands/add', component: BrandCrudComponent ,canActivate:[LoginGuard]  },
-  { path: 'brands/add/:brandId', component: BrandCrudComponent ,canActivate:[LoginGuard]  },
+  {
+    path: 'brands/add',
+    component: BrandCrudComponent,
+    canActivate: [LoginGuard],
+  },
+  {
+    path: 'brands/add/:brandId',
+    component: BrandCrudComponent,
+    canActivate: [LoginGuard],
+  },
 
-  { path: 'colors/add', component: ColorCrudComponent  ,canActivate:[LoginGuard] },
-  { path: 'colors/add/:colorId', component: ColorCrudComponent ,canActivate:[LoginGuard]  },
+  {
+    path: 'colors/add',
+    component: ColorCrudComponent,
+    canActivate: [LoginGuard],
+  },
+  {
+    path: 'colors/add/:colorId',
+    component: ColorCrudComponent,
+    canActivate: [LoginGuard],
+  },
 
-  { path: 'rentals', component: RentalComponent  },
-  { path: 'payment/:rental', component: PaymentComponent ,canActivate:[LoginGuard]  },
+  { path: 'rentals', component: RentalComponent },
+  {
+    path: 'payment/:rental',
+    component: PaymentComponent,
+    canActivate: [LoginGuard],
+  },
 
-  { path: 'setting', component: SettingComponent ,canActivate:[LoginGuard]  },
+  { path: 'setting', component: SettingComponent, canActivate: [LoginGuard] },
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
 ];
 
 @NgModule({

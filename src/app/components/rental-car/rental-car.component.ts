@@ -7,6 +7,7 @@ import { Rental } from 'src/app/models/rental';
 import { CustomerService } from 'src/app/services/customer.service';
 import { CarService } from 'src/app/services/car.service';
 import { CarDetail } from 'src/app/models/carDetail';
+import { CustomerDetail } from 'src/app/models/customerDetail';
 
 @Component({
   selector: 'app-rental-car',
@@ -15,7 +16,7 @@ import { CarDetail } from 'src/app/models/carDetail';
   providers: [DatePipe],
 })
 export class RentalCarComponent implements OnInit {
-  customers: Customer[];
+  customerDetails: CustomerDetail[];
   carDetails: CarDetail
   dataLoaded = false;
 
@@ -58,7 +59,7 @@ export class RentalCarComponent implements OnInit {
 
   getCustomer() {
     this.customerService.getCustomers().subscribe((response) => {
-      this.customers = response.data;
+      this.customerDetails = response.data;
       this.dataLoaded = true;
     });
   }
