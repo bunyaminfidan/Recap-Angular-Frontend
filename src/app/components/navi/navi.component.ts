@@ -30,6 +30,12 @@ export class NaviComponent implements OnInit {
     }
   }
 
+  ngOnChanges() {
+    if (this.currentUserId) {
+      this.getUserDetail();
+    }
+  }
+
   getUserDetail() {
     this.userService.getUserById(this.currentUserId).subscribe((response) => {
       this.user = response.data;
