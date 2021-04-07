@@ -77,7 +77,7 @@ export class RentalCarComponent implements OnInit {
         'Bilgilerinizi kontrol edin'
       );
     } else {
-      this.router.navigate(['/payment/', JSON.stringify(MyRental)]);
+      this.router.navigate(['dashboard/payment/', JSON.stringify(MyRental)]);
       this.toastrService.info(
         'Ödeme sayfasına yönlendiriliyorsunuz...',
         'Ödeme İşlemleri'

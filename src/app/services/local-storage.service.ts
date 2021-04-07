@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -15,31 +16,23 @@ export class LocalStorageService {
     return localStorage.getItem('token');
   }
 
-  removeToken(key: string) {
+  removeToken() {
     localStorage.removeItem('token');
   }
 
-  saveEmail(value: string) {
-    localStorage.removeItem('email');
-    localStorage.setItem('email', value);
-  }
-  getEmail() {
-    return localStorage.getItem('email');
-  }
+  // saveEmail(value: string) {
+  //   localStorage.removeItem('email');
+  //   localStorage.setItem('email', value);
+  // }
+  // getEmail() {
+  //   return localStorage.getItem('email');
+  // }
 
-  removeEmail(key: string) {
-    localStorage.removeItem('email');
-  }
+  // removeEmail() {
+  //   localStorage.removeItem('email');
+  // }
 
-  saveUserId(value: string) {
-    localStorage.removeItem('userId');
-    localStorage.setItem('userId', value);
-  }
-  getUserId() {
-    return localStorage.getItem('userId');
-  }
-
-  removeUserId(key: string) {
-    localStorage.removeItem('userId');
+  clean() {
+    localStorage.clear();
   }
 }

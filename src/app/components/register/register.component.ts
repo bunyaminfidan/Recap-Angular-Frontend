@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private localStorage: LocalStorageService
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -46,9 +46,9 @@ export class RegisterComponent implements OnInit {
       this.authService.registerModel(registerModel).subscribe(
         (response) => {
           this.toastrService.success('Tebrikler, kayıt oldunuz', 'Başarılı');
-          this.localStorage.saveToken(response.data.token);
-          this.localStorage.saveEmail(this.registerForm.value.email);
-          this.router.navigate(['cars']);
+          this.localStorageService.saveToken(response.data.token);
+       //   this.localStorageService.saveEmail(this.registerForm.value.email);
+          this.router.navigate(['dashboard/cars']);
         },
         (responseError) => {
           this.toastrService.error(responseError.error, 'Hata');

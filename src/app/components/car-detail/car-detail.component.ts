@@ -25,10 +25,6 @@ export class CarDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getByIdCarDetail(params['carId']);
-    
-        console.log(params['carId']);
-      } else {
-        console.log('else çalıştı.');
       }
     });
   }
@@ -39,6 +35,4 @@ export class CarDetailComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
-
-
 }

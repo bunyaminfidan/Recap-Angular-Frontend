@@ -1,0 +1,133 @@
+<div class="container py-5" id="custom-cards">
+  <h2 class="pb-2 border-bottom">Hesap Ayarları</h2>
+
+  <div class="row row-cols-2 align-items-stretch py-5">
+    <div class="col">
+      <div
+        class="card card-cover overflow-hidden text-dark bg-light rounded-5 shadow-lg"
+      >
+        <div class="d-flex flex-column p-2 pb-2 text-white text-shadow-1">
+          <!-- AAAAAA -->
+
+          <div class="content">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="title text-dark">Kullanıcı Ayarları</h5>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="userForm">
+                    <div class="mb-3">
+                      <label for="firstName">Adı</label>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          id="firstNameInput"
+                          formControlName="firstName"
+                          class="form-control"
+                          placeholder="kullanıcı adı"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="lastName">Adı</label>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          id="lastNameInput"
+                          formControlName="lastName"
+                          class="form-control"
+                          placeholder="kullanıcı soyadı"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="email">Adı</label>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          id="emailInput"
+                          formControlName="email"
+                          class="form-control"
+                          placeholder="kullanıcı email adresi"
+                        />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="card-footer">
+                  <div class="d-flex justify-content-around">
+                    <button
+                      class="btn btn-outline-primary me-md-3"
+                      (click)="userUpdate()"
+                    >
+                      Güncelle
+                    </button>
+
+                    <button type="button" class="btn btn-outline-danger">
+                      Hesabı Sil
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- aaaaaaa -->
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div
+        class="card card-cover overflow-hidden text-dark bg-light rounded-5 shadow-lg"
+      >
+        <div class="d-flex flex-column p-2 pb-2 text-white text-shadow-1">
+          <!-- AAAAAA -->
+
+          <div class="content">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="title text-dark">Şirket Ayarları</h5>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="customerForm">
+                    <div class="mb-3">
+                      <label for="companyName">Adı</label>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          id="companyNameInput"
+                          formControlName="companyName"
+                          class="form-control"
+                          placeholder="Şirket Adı"
+                        />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="card-footer">
+                  <div class="d-flex justify-content-around">
+                    <button
+                      class="btn btn-outline-primary me-md-3"
+                      (click)="customerUpdate()"
+                    >
+                      Güncelle
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- aaaaaaa -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

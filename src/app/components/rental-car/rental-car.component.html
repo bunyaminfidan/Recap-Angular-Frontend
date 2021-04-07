@@ -52,7 +52,7 @@
           <div class="col-8">
             <select class="form-select" [(ngModel)]="customerId">
               <option
-                [ngValue]="customerDetails.id"
+                [ngValue]="customerDetail.id"
                 *ngFor="let customerDetail of customerDetails"
               >
                 {{ customerDetail.firstName }} {{ customerDetail.lastName }} |

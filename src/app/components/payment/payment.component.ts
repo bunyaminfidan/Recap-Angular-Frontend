@@ -76,7 +76,7 @@ export class PaymentComponent implements OnInit {
 
       this.amountOfPayment = numberOfDays * this.carDetails.dailyPrice;
       if (this.amountOfPayment <= 0) {
-        this.router.navigate(['/cars']);
+        this.router.navigate(['cars']);
         this.toastrService.error(
           'Araç listesine yönlendiriliyorsunuz',
           'Hatalı işlem'

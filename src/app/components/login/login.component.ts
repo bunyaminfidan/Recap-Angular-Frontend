@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private autService: AuthService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
-    private localStorage: LocalStorageService,
+    private localStorageService: LocalStorageService,
     private router: Router,
     private userService: UserService
   ) {}
@@ -45,11 +45,9 @@ export class LoginComponent implements OnInit {
       this.autService.loginModel(loginModel).subscribe(
         (response) => {
           this.toastrService.info('Giriş Yapıldı', 'Başarılı');
-          this.localStorage.saveToken(response.data.token);
-          this.localStorage.saveEmail(this.loginForm.value.email);
-
-          // this.localStorage.saveUserId(response.data.userId.toString());
-          this.router.navigate(['cars']);
+          this.localStorageService.saveToken(response.data.token);
+          //this.localStorageService.saveEmail(this.loginForm.value.email);
+          this.router.navigate(['dashboard/cars']);
         },
         (responseError) => {
           console.log(responseError);

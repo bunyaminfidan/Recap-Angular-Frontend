@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,29 +12,35 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./navi.component.css'],
 })
 export class NaviComponent implements OnInit {
-  users: User;
-  isLogin: boolean;
+  user: User;
+  currentUserId: number;
+
   constructor(
     private authService: AuthService,
     private toastrService: ToastrService,
     private userService: UserService,
-    private localStorage: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    if (!this.users) {
-      this.getUser();
-      this.isLogin = true;
-    } else {
-      this.isLogin = false;
+    this.currentUserId = this.authService.getUserId();
+    if (this.currentUserId) {
+      this.getUserDetail();
     }
   }
 
-  getUser() {
-    let email = this.localStorage.getEmail();
-    this.userService.getUserByEmail(email).subscribe((response) => {
-      this.localStorage.saveUserId(response.data.id.toString());
-      this.users = response.data;
+  getUserDetail() {
+    this.userService.getUserById(this.currentUserId).subscribe((response) => {
+      this.user = response.data;
     });
+  }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
+  logOut() {
+    this.localStorageService.clean();
+    this.router.navigate(['']);
   }
 }

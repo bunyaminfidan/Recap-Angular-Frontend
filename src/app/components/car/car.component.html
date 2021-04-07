@@ -28,14 +28,14 @@
       <img
         [src]="imageIsNullCheck(carDetail.imagePath)"
         style="height: 150px"
-        routerLink="/cars/carDetail/{{ carDetail.id }}"
+        routerLink="carDetail/{{ carDetail.id }}"
         class="img-fluid img-thumbnail"
       />
       <div class="card-body">
         <h5 class="card-title">{{ carDetail.description }}</h5>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Marka: {{ carDetail.brandName }}</li>
+        <li class="list-group-item">Marka: {{ carDetail?.brandName }}</li>
         <li class="list-group-item">Model: {{ carDetail.modelYear }}</li>
         <li class="list-group-item">
           Günlük Fiyat:
@@ -47,7 +47,7 @@
           <button
             type="button"
             class="btn btn-secondary"
-            routerLink="/cars/carDetail/{{ carDetail.id }}"
+            routerLink="carDetail/{{ carDetail.id }}"
           >
             İncele
           </button>
