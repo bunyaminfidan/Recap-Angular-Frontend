@@ -55,6 +55,19 @@
                         />
                       </div>
                     </div>
+
+                    <div class="mb-3">
+                      <label for="findeksScore">Findeks Skoru</label>
+                      <div class="form-group">
+                        <input
+                          type="number"
+                          id="findeksScoreInput"
+                          formControlName="findeksScore"
+                          class="form-control"
+                          placeholder="Findeks Puanı"
+                        />
+                      </div>
+                    </div>
                   </form>
                 </div>
 
@@ -81,37 +94,91 @@
       </div>
     </div>
 
-    <div class="col">
-      <div
-        class="card card-cover overflow-hidden text-dark bg-light rounded-5 shadow-lg"
-      >
-        <div class="d-flex flex-column p-2 pb-2 text-white text-shadow-1">
-          <!-- AAAAAA -->
+    <div class="d-flex flex-column">
+      <!-- <div class="p-2">Flex item 1</div>
+      <div class="p-2">Flex item 2</div>
+      <div class="p-2">Flex item 3</div> -->
 
-          <div class="content">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="title text-dark">Şirket Ayarları</h5>
+      <div class="col">
+        <div
+          class="card card-cover overflow-hidden text-dark bg-light rounded-5 shadow-lg"
+        >
+          <div class="d-flex flex-column p-2 pb-2 text-white text-shadow-1">
+            <!-- AAAAAA -->
+
+            <div class="content">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="title text-dark">Şirket Ayarları</h5>
+                  </div>
+                  <div class="card-body">
+                    <form [formGroup]="customerForm">
+                      <div class="mb-3">
+                        <label for="companyName">Adı</label>
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            id="companyNameInput"
+                            formControlName="companyName"
+                            class="form-control"
+                            placeholder="Şirket Adı"
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="card-footer">
+                    <div class="d-flex justify-content-around">
+                      <button
+                        class="btn btn-outline-primary me-md-3"
+                        (click)="customerUpdate()"
+                      >
+                        Güncelle
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <form [formGroup]="customerForm">
-                    <div class="mb-3">
-                      <label for="companyName">Adı</label>
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          id="companyNameInput"
-                          formControlName="companyName"
-                          class="form-control"
-                          placeholder="Şirket Adı"
-                        />
+              </div>
+            </div>
+
+            <!-- aaaaaaa -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Findeks Score  -->
+
+      <div class="col">
+        <div
+          class="card card-cover overflow-hidden text-dark bg-light rounded-5 shadow-lg"
+        >
+          <div class="d-flex flex-column p-2 pb-2 text-white text-shadow-1">
+            <!-- AAAAAA -->
+
+            <div class="content">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="title text-dark">Findeks Puanı</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="progress" style="height: 51px">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        [style]="findeksScorePercentageRate()"
+                        aria-valuenow="25"
+                        aria-valuemin="0"
+                        aria-valuemax="1900"
+                      >
+                        <span>{{ user?.findeksScore }}</span>
                       </div>
                     </div>
-                  </form>
-                </div>
+                  </div>
 
-                <div class="card-footer">
+                  <!-- <div class="card-footer">
                   <div class="d-flex justify-content-around">
                     <button
                       class="btn btn-outline-primary me-md-3"
@@ -120,12 +187,13 @@
                       Güncelle
                     </button>
                   </div>
+                </div> -->
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- aaaaaaa -->
+            <!-- aaaaaaa -->
+          </div>
         </div>
       </div>
     </div>

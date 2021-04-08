@@ -31,6 +31,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AccountComponent } from './components/account/account.component';
+import { RegisteredCreditCardComponent } from './components/registered-credit-card/registered-credit-card.component';
 
 
 
@@ -59,6 +60,7 @@ import { AccountComponent } from './components/account/account.component';
     HomeComponent,
     DashboardComponent,
     AccountComponent,
+    RegisteredCreditCardComponent,
   ],
   imports: [
     BrowserModule,

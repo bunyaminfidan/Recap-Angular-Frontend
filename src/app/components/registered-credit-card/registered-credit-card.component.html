@@ -1,0 +1,58 @@
+<div class="accordion" id="RegisteredCreditCardAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#RegisteredCreditCard"
+        aria-expanded="false"
+        aria-controls="RegisteredCreditCard"
+      >
+        Kayıtlı Kredi Kartları
+      </button>
+    </h2>
+    <div
+      id="RegisteredCreditCard"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingTwo"
+      data-bs-parent="#RegisteredCreditCardAccordion"
+    >
+      <div class="accordion-body">
+        <link
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+          rel="stylesheet"
+        />
+        <div class="container">
+          <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+              <div
+                class="col-md-4"
+                *ngFor="let registeredCreditCard of registeredCreditCards"
+              >
+                <div class="payment-card" (click)="currentCreditCard(registeredCreditCard)">
+                  <i class="fa fa-cc-visa payment-icon-big text-success"></i>
+                  <h4>{{ registeredCreditCard.number }}</h4>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <small>
+                        <strong>Expiry date:</strong>
+                        {{ registeredCreditCard.expirationDate }}
+                      </small>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                      <small>
+                        <strong>Name:</strong>
+                        {{ registeredCreditCard.nameOnTheCard }}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

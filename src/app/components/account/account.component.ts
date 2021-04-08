@@ -37,7 +37,6 @@ export class AccountComponent implements OnInit {
     this.currentUserId = this.autService.getUserId();
     this.getUserDetail();
     this.getCustomer();
-
     this.createUserForm();
     this.createCustomerForm();
   }
@@ -46,8 +45,8 @@ export class AccountComponent implements OnInit {
     if (this.currentUserId) {
       this.userService.getUserById(this.currentUserId).subscribe((response) => {
         this.user = response.data;
-
         this.userForm.patchValue(this.user);
+        console.log('getUserDetail ' + this.user.findeksScore);
       });
     }
   }
@@ -67,6 +66,7 @@ export class AccountComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.required],
+      findeksScore: ['', Validators.required],
     });
   }
 
@@ -80,9 +80,17 @@ export class AccountComponent implements OnInit {
     if (this.userForm.valid) {
       let newUser = Object.assign({}, this.userForm.value);
       newUser.id = this.currentUserId;
-      this.userService.update(newUser).subscribe((response) => {
-        this.toastrService.success(response.message, 'Başarılı');
-      });
+
+      console.log(newUser);
+
+      this.userService.update(newUser).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
+        },
+        (responseError) => {
+          this.toastrService.error(responseError.error.message);
+        }
+      );
     }
   }
 
@@ -92,9 +100,26 @@ export class AccountComponent implements OnInit {
         { id: this.currentCustomer.id, userId: this.currentCustomer.userId },
         this.customerForm.value
       );
-      this.customerService.update(newCustomer).subscribe((response) => {
-        this.toastrService.success(response.message, 'Başarılı');
-      });
+      this.customerService.update(newCustomer).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
+        },
+        (responseError) => {
+          this.toastrService.error(responseError.error.message);
+        }
+      );
     }
+  }
+
+  findeksScorePercentageRate() {
+    if (this.user?.findeksScore > 0) {
+      let findeksFullScore = 1900;
+
+      var result = this.user.findeksScore / findeksFullScore;
+      var userFindeksPercentageRate = result * 100;
+
+      return 'width: ' + userFindeksPercentageRate + '%';
+    }
+    return 'width: 0%';
   }
 }

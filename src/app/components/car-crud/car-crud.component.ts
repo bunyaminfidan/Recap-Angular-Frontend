@@ -47,13 +47,8 @@ export class CarCrudComponent implements OnInit {
   }
 
   isInputToCarIdEmpty() {
-    this.inputToCurrentCarId
-      ? this.getByIdCar(this.inputToCurrentCarId)
-      : '';
+    this.inputToCurrentCarId ? this.getByIdCar(this.inputToCurrentCarId) : '';
   }
-
-
-
 
   createCarAddForm() {
     this.carAddForm = this.formBuilder.group({
@@ -62,6 +57,7 @@ export class CarCrudComponent implements OnInit {
       modelYear: ['', Validators.required],
       dailyPrice: ['', Validators.required],
       description: ['', Validators.required],
+      findeksScore: ['', Validators.required],
     });
   }
 

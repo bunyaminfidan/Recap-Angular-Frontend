@@ -8,6 +8,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { CarService } from 'src/app/services/car.service';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CustomerDetail } from 'src/app/models/customerDetail';
+import { RegisteredCreditCard } from 'src/app/models/registeredCreditCard';
 
 @Component({
   selector: 'app-rental-car',
@@ -17,7 +18,7 @@ import { CustomerDetail } from 'src/app/models/customerDetail';
 })
 export class RentalCarComponent implements OnInit {
   customerDetails: CustomerDetail[];
-  carDetails: CarDetail
+  carDetail: CarDetail;
   dataLoaded = false;
 
   customerId: number;
@@ -28,9 +29,10 @@ export class RentalCarComponent implements OnInit {
   maxMinDate: string | null;
   firstDateSelected: boolean = false;
 
+
   constructor(
     private customerService: CustomerService,
-    private carService:CarService,
+    private carService: CarService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private toastrService: ToastrService,
@@ -41,7 +43,6 @@ export class RentalCarComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getByIdCarDetail(params['carId']);
-      
       } else {
         console.log('this.getByIdCarDetail(params(carId):  else çalıştı.');
       }
@@ -52,7 +53,7 @@ export class RentalCarComponent implements OnInit {
 
   getByIdCarDetail(carId: number) {
     this.carService.getByIdCarDetail(carId).subscribe((response) => {
-     this.carDetails = response.data[0]
+      this.carDetail = response.data[0];
       this.dataLoaded = true;
     });
   }
@@ -69,7 +70,7 @@ export class RentalCarComponent implements OnInit {
       rentDate: this.rentDate,
       returnDate: this.returnDate,
       customerId: this.customerId,
-      carId: this.carDetails.id,
+      carId: this.carDetail.id,
     };
     if (MyRental.customerId == undefined || MyRental.rentDate == undefined) {
       this.toastrService.error(
@@ -115,10 +116,5 @@ export class RentalCarComponent implements OnInit {
       'yyyy-MM-dd'
     );
     return this.maxDate;
-  }
-
-  setCustomerId(customerId: string) {
-    this.customerId = +customerId;
-    console.log(this.customerId);
   }
 }

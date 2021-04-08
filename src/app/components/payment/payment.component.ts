@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetail } from 'src/app/models/carDetail';
 import { Customer } from 'src/app/models/customer';
 import { CustomerDetail } from 'src/app/models/customerDetail';
 import { FakeCard } from 'src/app/models/fakeCard';
+import { RegisteredCreditCard } from 'src/app/models/registeredCreditCard';
 import { Rental } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -29,6 +30,8 @@ export class PaymentComponent implements OnInit {
   fakeCard: FakeCard;
   cardExist: Boolean = false;
 
+  currentRegisteredCreditCard: RegisteredCreditCard;
+
   constructor(
     private activateRoute: ActivatedRoute,
     private carService: CarService,
@@ -48,6 +51,18 @@ export class PaymentComponent implements OnInit {
         this.getCarDetail();
       }
     });
+  }
+
+  GetRegisteredComponentCurrentCard(
+    currentRegisteredCreditCard: RegisteredCreditCard
+  ) {
+    console.log(currentRegisteredCreditCard.number);
+    if (this.currentRegisteredCreditCard) {
+      this.nameOnTheCard = this.currentRegisteredCreditCard.nameOnTheCard;
+      this.cardNumber = this.currentRegisteredCreditCard.number;
+      this.cardCvv = this.currentRegisteredCreditCard.cvv;
+      this.expirationDate = this.currentRegisteredCreditCard.expirationDate;
+    }
   }
 
   getCustomerDetailById(customerId: number) {

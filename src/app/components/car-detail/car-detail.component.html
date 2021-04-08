@@ -1,46 +1,56 @@
-<div class="accordion-body">
-  <div
-    *ngIf="dataLoaded == false"
-    class="spinner-border text-primary"
-    role="status"
-  >
-    <span class="visually-hidden">Yükleniyor...</span>
-  </div>
+<div
+  *ngIf="dataLoaded == false"
+  class="spinner-border text-primary"
+  role="status"
+>
+  <span class="visually-hidden">Yükleniyor...</span>
+</div>
 
-  <table *ngIf="dataLoaded == true" class="table table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">ADI</th>
-        <th scope="col">MARKA</th>
-        <th scope="col">RENK</th>
-        <th scope="col">GÜNLÜK FİYAT</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let carDetail of carDetails">
-        <td scope="row">{{ carDetail.id }}</td>
-        <td scope="row">{{ carDetail.description }}</td>
-        <td scope="row">{{ carDetail.brandName }}</td>
-        <td scope="row">{{ carDetail.colorName }}</td>
-        <td scope="row">{{ carDetail.dailyPrice }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container" *ngIf="dataLoaded == true">
+  <div class="row">
+    <div class="col-md-8"><app-car-image></app-car-image></div>
 
-  <app-car-image></app-car-image>
+    <div class="col-md-4">
+      <div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            Marka: {{ carDetail.brandName | uppercase }}
+          </li>
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            Renk: {{ carDetail.colorName }}
+          </li>
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            Model Yılı: {{ carDetail.modelYear }}
+          </li>
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            Günlük fiyat:
+            {{ carDetail.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2" }}
+          </li>
+          <li class="list-group-item"  *ngFor="let carDetail of carDetails">Findeks puanı: {{ carDetail.findeksScore }}</li>
 
-  <div *ngFor="let carDetail of carDetails">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button
-        class="btn btn-outline-secondary me-md-2 mb-2"
-        type="button"
-        routerLink="update"
-      >
-        Düzenle
-      </button>
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            Açıklama: {{ carDetail.description }}
+          </li>
+        </ul>
+        <section style="float: right">
+          <app-rental-car></app-rental-car>
+
+          <button
+            *ngFor="let carDetail of carDetails"
+            style="
+              width: 120px;
+              margin-right: 10px;
+              margin-top: 21px;
+              width: 120px;
+            "
+            class="btn btn-outline-success"
+            type="button"
+            routerLink="update"
+          >
+            Düzenle
+          </button>
+        </section>
+      </div>
     </div>
   </div>
-
-  <app-rental-car></app-rental-car>
 </div>

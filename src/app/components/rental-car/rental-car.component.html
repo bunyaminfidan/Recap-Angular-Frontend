@@ -1,28 +1,31 @@
 <!-- Button trigger modal -->
+
 <div class="d-grid gap-2">
   <button
+  
     type="button"
-    class="btn btn-primary"
+    style="width: 120px; margin-right: 10px; margin-top: 21px; width: 120px"
+    class="btn btn-outline-secondary"
     data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
+    data-bs-target="#rentalCarModal"
   >
-    Aracı Kirala
+    Kirala
   </button>
 </div>
 
 <!-- Modal -->
 <div
   class="modal fade"
-  id="exampleModal"
+  id="rentalCarModal"
   tabindex="-1"
-  aria-labelledby="exampleModalLabel"
+  aria-labelledby="rentalCarModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          {{ carDetails.brandName }} - {{ carDetails.colorName }} | Aracı Kirala
+        <h5 class="modal-title" id="rentalCarModalLabel">
+          {{ carDetail.brandName }} - {{ carDetail.colorName }} | Aracı Kirala
         </h5>
         <button
           type="button"
@@ -41,7 +44,7 @@
               type="text"
               disabled="disabled"
               class="form-control"
-              [value]="carDetails.dailyPrice | currency: '₺'"
+              [value]="carDetail.dailyPrice | currency: '₺'"
             />
           </div>
         </div>
