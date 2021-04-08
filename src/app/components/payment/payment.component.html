@@ -1,3 +1,11 @@
+
+
+<app-registered-credit-card
+  (cardSend)="getRegisteredComponentCurrentCardOutPut($event)"
+></app-registered-credit-card>
+
+
+
 <div class="card mt-4">
   <div class="card-header text-center">
     <strong>İşlem Özeti</strong>
@@ -35,73 +43,79 @@
 </div>
 <div class="divider py-1"><hr /></div>
 
-<app-registered-credit-card
-  (cardSend)="GetRegisteredComponentCurrentCard($event)"
-></app-registered-credit-card>
 
-<div class="divider py-1"><hr /></div>
-<div class="card mt-4">
-  <div class="card-header text-center">
-    <strong>Ödeme İşlemlemi</strong>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="inputbox mt-3">
-        <span>Kart Üzerindeki Ad Soyad</span>
-        <input
-          [(ngModel)]="nameOnTheCard"
-          type="text"
-          name="name"
-          class="form-control"
-          required="required"
-        />
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header text-center">
+        <strong>Ödeme İşlemlemi</strong>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="inputbox mt-3 mr-2">
-            <span>Kart Numarası</span>
-            <input
-              [(ngModel)]="cardNumber"
-              type="text"
-              name="name"
-              class="form-control"
-              required="required"
-            />
-            <i class="fa fa-credit-card"></i>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="d-flex flex-row">
-            <div class="inputbox mt-3 mr-2">
-              <span>Son Kullanım Tarihi</span>
+      <div class="card-body">
+        <form [formGroup]="paymentForm">
+          <div class="mb-3">
+            <label for="nameOnTheCard">Kartın Üzerindeki Ad Soyad</label>
+            <div class="form-group">
               <input
-                [(ngModel)]="expirationDate"
                 type="text"
-                name="name"
+                id="nameOnTheCard"
+                formControlName="nameOnTheCard"
                 class="form-control"
-                required="required"
-              />
-            </div>
-            <div class="inputbox mt-3 mr-2">
-              <span>Güvenlik Kodu</span>
-              <input
-                [(ngModel)]="cardCvv"
-                type="text"
-                name="name"
-                class="form-control"
-                required="required"
               />
             </div>
           </div>
+
+          <div class="mb-3">
+            <label for="number">Kart Numarası</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="number"
+                formControlName="number"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="expirationDate">Kart Geçerlilik Süresi</label>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="expirationDate"
+                    formControlName="expirationDate"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="cvv">Cvv</label>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="cvv"
+                    formControlName="cvv"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <div class="row">
+          <button (click)="rentACar()" class="btn btn-outline-success">
+            <strong>{{ amountOfPayment | currency: "₺" }} </strong>Ödeme Yap
+          </button>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="card-footer">
-    <div class="row">
-      <button (click)="rentACar()" class="btn btn-success">
-        <strong>{{ amountOfPayment | currency: "₺" }} </strong>Ödeme Yap
-      </button>
     </div>
   </div>
 </div>

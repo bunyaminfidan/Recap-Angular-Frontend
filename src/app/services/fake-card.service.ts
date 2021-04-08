@@ -15,7 +15,7 @@ export class FakeCardService {
 
   isCardExist(fakeCard: FakeCard): Observable<ResponseModel> {
     let newPath = this.apiUrl + 'fakecards/iscardexist';
-    console.log(fakeCard);
+    
     return this.httpClient.post<ResponseModel>(newPath, fakeCard);
   }
 
