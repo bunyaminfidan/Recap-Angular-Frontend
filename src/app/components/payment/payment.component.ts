@@ -38,8 +38,10 @@ export class PaymentComponent implements OnInit {
   registeredCardCheck: boolean;
 
   amountOfPayment: number = 0;
+  isCardCorrect: boolean;
 
   fakeCard: FakeCard;
+  registeredCreditCard: RegisteredCreditCard;
 
   currentRegisteredCreditCard: RegisteredCreditCard;
 
@@ -118,99 +120,109 @@ export class PaymentComponent implements OnInit {
     }
   }
 
-
-
   async rentACar() {
-
-
-
-
-    
     if (this.paymentForm.valid) {
-      let fakeCard: FakeCard = {
-        nameOnTheCard: this.paymentForm.value.nameOnTheCard,
-        number: this.paymentForm.value.number,
-        expirationDate: this.paymentForm.value.expirationDate,
-        cvv: this.paymentForm.value.cvv,
-      };
+      this.createFakeCard();
+      this.createRegisteredCreditCard();
+      this.isCardExist();
+      this.checkIsCardOrSaveCard(this.isCardCorrect);
+      this.checkIsCardInfo(this.isCardCorrect);
+    }
+  }
 
-      let newRegisteredUserCreditCard = Object.assign(
-        {},
-        this.paymentForm.value
-      );
-      newRegisteredUserCreditCard.userId = this.currentUserId;
-      newRegisteredUserCreditCard.isActive = true;
-      console.log(newRegisteredUserCreditCard);
+  createFakeCard() {
+    this.fakeCard = {
+      nameOnTheCard: this.paymentForm.value.nameOnTheCard,
+      number: this.paymentForm.value.number,
+      expirationDate: this.paymentForm.value.expirationDate,
+      cvv: this.paymentForm.value.cvv,
+    };
+  }
 
-      var resultIsCard = await this.isCardExist(fakeCard);
-      console.log(resultIsCard);
+  createRegisteredCreditCard() {
+    this.registeredCreditCard = Object.assign({}, this.paymentForm.value);
+    this.registeredCreditCard.userId = this.currentUserId;
+    this.registeredCreditCard.isActive = true;
+    console.log(this.registeredCreditCard);
+  }
 
-      if (resultIsCard) {
-        if (this.registeredCardCheck) {
-          this.registeredCreditCardService
-            .isRegisteredCreditCard(newRegisteredUserCreditCard)
-            .subscribe(
-              (response) => {
-                this.toastrService.info(
-                  'Kartınız sistemde zaten kayıtlı',
-                  'Bilgi'
-                );
-              },
-              (responseError) => {
-                console.log('responseError ' + responseError.error.success);
-                this.registeredCreditCardService
-                  .add(newRegisteredUserCreditCard)
-                  .subscribe((response) => {
-                    console.log(response);
-                  });
-              }
-            );
-        }
-      }
-
-      if (resultIsCard) {
-        this.fakeCard = await this.getFakeCardByCardNumber(
-          this.paymentForm.value.number
-        );
-        if (this.fakeCard.moneyInTheCard >= this.amountOfPayment) {
-          this.fakeCard.moneyInTheCard =
-            this.fakeCard.moneyInTheCard - this.amountOfPayment;
-          this.updateCard(fakeCard);
-
-          this.rentalService.addRental(this.rental).subscribe((response) => {
-            if (response.success) {
-              this.toastrService.success(response.message, 'Işlem başarılı');
-            } else {
-              this.toastrService.error('Kiralama işlemi hatalı', 'Hata');
+  checkIsCardOrSaveCard(isCard: boolean) {
+    if (isCard) {
+      if (this.registeredCardCheck) {
+        this.registeredCreditCardService
+          .isRegisteredCreditCard(this.registeredCreditCard)
+          .subscribe(
+            (response) => {
+              this.toastrService.info(
+                'Kartınız sistemde zaten kayıtlı',
+                'Bilgi'
+              );
+            },
+            (responseError) => {
+              this.registeredCreditCardService
+                .add(this.registeredCreditCard)
+                .subscribe((response) => {
+                  this.toastrService.success(response.message, 'Başarılı');
+                });
             }
-          });
-        } else {
-          this.toastrService.error(
-            'Kartınızda yeterli para bulunmamaktadır',
-            'Hata'
           );
-        }
-      } else {
-        this.toastrService.error('Bankanız bilgilerinizi onaylamadı', 'Hata');
       }
     }
   }
 
-  async isCardExist(fakeCard: FakeCard) {
-    let result = (await this.fakeCardService.isCardExist(fakeCard).toPromise())
-      .success;
-
-    console.log(result);
-    return result;
+  isHaveCardMoneyAndSell() {
+    if (this.fakeCard.moneyInTheCard >= this.amountOfPayment) {
+      this.fakeCard.moneyInTheCard =
+        this.fakeCard.moneyInTheCard - this.amountOfPayment;
+    } else {
+      this.toastrService.error(
+        'Kartınızda yeterli miktar bulunmamaktadır',
+        'Bakiye Yetersiz'
+      );
+    }
   }
 
-  async getFakeCardByCardNumber(cardNumber: string) {
-    return (await this.fakeCardService.getCardByNumber(cardNumber).toPromise())
-      .data[0];
+  fakeCardUpdate(fakeCard: FakeCard) {
+    this.fakeCardService.updateCard(this.fakeCard).subscribe((response) => {});
   }
 
-  updateCard(fakeCard: FakeCard) {
-    this.fakeCardService.updateCard(fakeCard);
+  addRental() {
+    this.rentalService.addRental(this.rental).subscribe((response) => {
+      if (response.success) {
+        this.toastrService.success(response.message, 'Işlem başarılı');
+      } else {
+        this.toastrService.error('Kiralama işlemi hatalı', 'Hata');
+      }
+    });
+  }
+  async checkIsCardInfo(check: boolean) {
+    if (check) {
+      this.fakeCard = (
+        await this.fakeCardService
+          .getCardByNumber(this.paymentForm.value.number)
+          .toPromise()
+      ).data[0];
+
+      this.isHaveCardMoneyAndSell();
+      this.fakeCardUpdate;
+      this.addRental();
+    }
+  }
+
+  isCardExist() {
+    this.fakeCardService.isCardExist(this.fakeCard).subscribe(
+      (response) => {
+        this.isCardCorrect = true;
+      },
+      (responseError) => {
+        this.toastrService.error(
+          'Kart bilgileri hatalı, kontrol ediniz',
+          'Hata'
+        );
+
+        this.isCardCorrect = false;
+      }
+    );
   }
 
   registeredCard(event: any) {
