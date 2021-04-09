@@ -17,6 +17,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { RegisteredCreditCardService } from 'src/app/services/registered-credit-card.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-payment',
@@ -29,7 +31,11 @@ export class PaymentComponent implements OnInit {
   rental: Rental;
   carDetails: CarDetail;
   customeDetails: CustomerDetail;
+
   getCustomerId: number;
+  currentUserId: number;
+
+  registeredCardCheck: boolean;
 
   amountOfPayment: number = 0;
 
@@ -45,7 +51,9 @@ export class PaymentComponent implements OnInit {
     private toastrService: ToastrService,
     private rentalService: RentalService,
     private fakeCardService: FakeCardService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private registeredCreditCardService: RegisteredCreditCardService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +63,7 @@ export class PaymentComponent implements OnInit {
         this.getCustomerId = JSON.parse(params['rental']).customerId;
         this.getCustomerDetailById(this.getCustomerId);
         this.getCarDetail();
+        this.currentUserId = this.authService.getUserId();
       }
     });
     this.createPaymentForm();
@@ -109,7 +118,14 @@ export class PaymentComponent implements OnInit {
     }
   }
 
+
+
   async rentACar() {
+
+
+
+
+    
     if (this.paymentForm.valid) {
       let fakeCard: FakeCard = {
         nameOnTheCard: this.paymentForm.value.nameOnTheCard,
@@ -118,7 +134,39 @@ export class PaymentComponent implements OnInit {
         cvv: this.paymentForm.value.cvv,
       };
 
+      let newRegisteredUserCreditCard = Object.assign(
+        {},
+        this.paymentForm.value
+      );
+      newRegisteredUserCreditCard.userId = this.currentUserId;
+      newRegisteredUserCreditCard.isActive = true;
+      console.log(newRegisteredUserCreditCard);
+
       var resultIsCard = await this.isCardExist(fakeCard);
+      console.log(resultIsCard);
+
+      if (resultIsCard) {
+        if (this.registeredCardCheck) {
+          this.registeredCreditCardService
+            .isRegisteredCreditCard(newRegisteredUserCreditCard)
+            .subscribe(
+              (response) => {
+                this.toastrService.info(
+                  'Kartınız sistemde zaten kayıtlı',
+                  'Bilgi'
+                );
+              },
+              (responseError) => {
+                console.log('responseError ' + responseError.error.success);
+                this.registeredCreditCardService
+                  .add(newRegisteredUserCreditCard)
+                  .subscribe((response) => {
+                    console.log(response);
+                  });
+              }
+            );
+        }
+      }
 
       if (resultIsCard) {
         this.fakeCard = await this.getFakeCardByCardNumber(
@@ -163,5 +211,13 @@ export class PaymentComponent implements OnInit {
 
   updateCard(fakeCard: FakeCard) {
     this.fakeCardService.updateCard(fakeCard);
+  }
+
+  registeredCard(event: any) {
+    if (event.target.checked) {
+      this.registeredCardCheck = true;
+    } else {
+      this.registeredCardCheck = false;
+    }
   }
 }

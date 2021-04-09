@@ -6,6 +6,81 @@
 
 <div class="row">
   <div class="col-md-6">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <strong class="text-dark"> Marka: </strong>
+          </div>
+          <div class="col-md-6">{{ carDetails.brandName | uppercase }}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <strong class="text-dark"> Renk: </strong>
+          </div>
+          <div class="col-md-6">{{ carDetails.colorName | uppercase }}</div>
+        </div>
+      </li>
+
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <strong class="text-dark"> Model Yılı: </strong>
+          </div>
+          <div class="col-md-6">{{ carDetails.modelYear }}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <strong class="text-dark"> Günlük fiyat: </strong>
+          </div>
+          <div class="col-md-6">
+            {{
+              carDetails.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2"
+            }}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <strong class="text-dark"> Toplam Fiyat: </strong>
+          </div>
+          <div class="col-md-6">
+            <strong class="text-danger">
+              {{ amountOfPayment | currency: "₺" }}
+            </strong>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <strong class="text-dark"> Başlangıç: </strong>
+          </div>
+          <div class="col-md-6">
+            {{ rental.rentDate }}
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <strong class="text-dark"> Bitiş: </strong>
+          </div>
+          <div class="col-md-6">
+            {{ rental.returnDate }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
     <div class="card">
       <div class="card-header text-center">
         <strong>Ödeme İşlemlemi</strong>
@@ -37,7 +112,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="mb-3">
                 <label for="expirationDate">Kart Geçerlilik Süresi</label>
                 <div class="form-group">
@@ -51,7 +126,7 @@
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="mb-3">
                 <label for="cvv">Cvv</label>
                 <div class="form-group">
@@ -61,6 +136,25 @@
                     formControlName="cvv"
                     class="form-control"
                   />
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="registeredCard"></label>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input
+                      (click)="registeredCard($event)"
+                      type="checkbox"
+                      class="form-check-input"
+                      id="registeredCard"
+                    />
+                    <label class="form-check-label" for="registeredCard"
+                      >Kartı Kaydet</label
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,29 +170,5 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="col-md-6">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        Marka: {{ carDetails.brandName | uppercase }}
-      </li>
-      <li class="list-group-item">Renk: {{ carDetails.colorName }}</li>
-      <li class="list-group-item">Model Yılı: {{ carDetails.modelYear }}</li>
-      <li class="list-group-item">
-        Günlük fiyat:
-        {{ carDetails.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2" }}
-      </li>
-      <li class="list-group-item">
-        Toplam fiyat:
-        <strong class="text-danger">
-          {{ amountOfPayment | currency: "₺" }}
-        </strong>
-      </li>
-
-      <li class="list-group-item">Başlangıç: {{ rental.rentDate }}</li>
-
-      <li class="list-group-item">Bitiş: {{ rental.returnDate }}</li>
-    </ul>
   </div>
 </div>

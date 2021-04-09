@@ -14,44 +14,90 @@
       <div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let carDetail of carDetails">
-            Marka: {{ carDetail.brandName | uppercase }}
-          </li>
-          <li class="list-group-item" *ngFor="let carDetail of carDetails">
-            Renk: {{ carDetail.colorName }}
-          </li>
-          <li class="list-group-item" *ngFor="let carDetail of carDetails">
-            Model Yılı: {{ carDetail.modelYear }}
-          </li>
-          <li class="list-group-item" *ngFor="let carDetail of carDetails">
-            Günlük fiyat:
-            {{ carDetail.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2" }}
-          </li>
-          <li class="list-group-item" *ngFor="let carDetail of carDetails">
-            Findeks puanı: {{ carDetail.findeksScore }}
+            <div class="row">
+              <div class="col-md-6">
+                <strong class="text-dark"> Marka: </strong>
+              </div>
+              <div class="col-md-6">
+                {{ carDetail?.brandName | uppercase }}
+              </div>
+            </div>
           </li>
 
           <li class="list-group-item" *ngFor="let carDetail of carDetails">
-            Açıklama: {{ carDetail.description }}
+            <div class="row">
+              <div class="col-md-6">
+                <strong class="text-dark"> Renk: </strong>
+              </div>
+              <div class="col-md-6">{{ carDetail.colorName }}</div>
+            </div>
+          </li>
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            <div class="row">
+              <div class="col-md-6">
+                <strong class="text-dark"> Model: </strong>
+              </div>
+              <div class="col-md-6">
+                {{ carDetail.modelYear }}
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            <div class="row">
+              <div class="col-md-6">
+                <strong class="text-dark"> Günlük fiyat: </strong>
+              </div>
+              <div class="col-md-6">
+                {{
+                  carDetail.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2"
+                }}
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            <div class="row">
+              <div class="col-md-6">
+                <strong class="text-dark"> Findeks puanı: </strong>
+              </div>
+              <div class="col-md-6 text-danger">
+                {{ carDetail.findeksScore }}
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            <div class="row">
+              <div class="col-md-6">
+                <strong class="text-dark"> Açıklama: </strong>
+              </div>
+              <div class="col-md-6">
+                {{ carDetail.description }}
+              </div>
+            </div>
           </li>
         </ul>
-        <section style="float: right">
-          <app-rental-car></app-rental-car>
 
-          <button
-            *ngFor="let carDetail of carDetails"
-            style="
-              width: 120px;
-              margin-right: 10px;
-              margin-top: 21px;
-              width: 120px;
-            "
-            class="btn btn-outline-success"
-            type="button"
-            routerLink="edit/{{ carDetail.id }}"
-          >
-            Düzenle
-          </button>
-        </section>
+        <div class="row">
+          <div class="col-md-6">
+            <app-rental-car></app-rental-car>
+          </div>
+          <div class="col-md-6">
+            <button
+              *ngFor="let carDetail of carDetails"
+              style="
+                width: 120px;
+                margin-right: 10px;
+                margin-top: 21px;
+                width: 120px;
+              "
+              class="btn btn-outline-success"
+              type="button"
+              routerLink="edit/{{ carDetail.id }}"
+            >
+              Düzenle
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
