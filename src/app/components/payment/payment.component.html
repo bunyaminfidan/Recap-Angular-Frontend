@@ -1,49 +1,8 @@
-
-
 <app-registered-credit-card
   (cardSend)="getRegisteredComponentCurrentCardOutPut($event)"
 ></app-registered-credit-card>
 
-
-
-<div class="card mt-4">
-  <div class="card-header text-center">
-    <strong>İşlem Özeti</strong>
-  </div>
-  <div class="card-body">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Başlangıç</th>
-          <th>Bitiş</th>
-          <th>Marka</th>
-          <th>Renk</th>
-          <th>Model Yılı</th>
-          <th>Günlük</th>
-          <th>Toplam</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ rental.rentDate }}</td>
-          <td>{{ rental.returnDate }}</td>
-          <td>{{ carDetails.brandName }}</td>
-          <td>{{ carDetails.colorName }}</td>
-          <td>{{ carDetails.modelYear }}</td>
-          <td>{{ carDetails.dailyPrice | currency: "₺" }}</td>
-          <td>
-            <strong class="text-danger">{{
-              amountOfPayment | currency: "₺"
-            }}</strong>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 <div class="divider py-1"><hr /></div>
-
-
 
 <div class="row">
   <div class="col-md-6">
@@ -117,5 +76,29 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="col-md-6">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        Marka: {{ carDetails.brandName | uppercase }}
+      </li>
+      <li class="list-group-item">Renk: {{ carDetails.colorName }}</li>
+      <li class="list-group-item">Model Yılı: {{ carDetails.modelYear }}</li>
+      <li class="list-group-item">
+        Günlük fiyat:
+        {{ carDetails.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2" }}
+      </li>
+      <li class="list-group-item">
+        Toplam fiyat:
+        <strong class="text-danger">
+          {{ amountOfPayment | currency: "₺" }}
+        </strong>
+      </li>
+
+      <li class="list-group-item">Başlangıç: {{ rental.rentDate }}</li>
+
+      <li class="list-group-item">Bitiş: {{ rental.returnDate }}</li>
+    </ul>
   </div>
 </div>

@@ -82,6 +82,7 @@ export class CarCrudComponent implements OnInit {
         modelYear: this.cars.modelYear,
         dailyPrice: this.cars.dailyPrice,
         description: this.cars.description,
+        findeksScore:this.cars.findeksScore,
       });
 
       this.dataLoaded = true;

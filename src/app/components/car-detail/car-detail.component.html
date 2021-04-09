@@ -26,7 +26,9 @@
             Günlük fiyat:
             {{ carDetail.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2" }}
           </li>
-          <li class="list-group-item"  *ngFor="let carDetail of carDetails">Findeks puanı: {{ carDetail.findeksScore }}</li>
+          <li class="list-group-item" *ngFor="let carDetail of carDetails">
+            Findeks puanı: {{ carDetail.findeksScore }}
+          </li>
 
           <li class="list-group-item" *ngFor="let carDetail of carDetails">
             Açıklama: {{ carDetail.description }}
@@ -45,7 +47,7 @@
             "
             class="btn btn-outline-success"
             type="button"
-            routerLink="update"
+            routerLink="edit/{{ carDetail.id }}"
           >
             Düzenle
           </button>

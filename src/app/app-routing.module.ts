@@ -33,26 +33,94 @@ const routes: Routes = [
   },
 
   {
+    path: 'payment/:rental',
+    component: PaymentComponent,
+    canActivate: [LoginGuard],
+  },
+
+  {
     path: 'dashboard',
     component: DashboardComponent,
 
     children: [
+      // Ana Sayfa  Araba İşlemleri
       { path: 'cars', component: CarComponent },
-      { path: 'cars/brand/:brandId', component: CarComponent },
-      { path: 'cars/color/:colorId', component: CarComponent },
       { path: 'cars/carDetail/:carId', component: CarDetailComponent },
-
-      { path: 'cars/carImages/:carId', component: CarImageComponent },
-
-      { path: 'cars/filter/:colorId', component: CarComponent },
-      { path: 'cars/filter/:brandId/', component: CarComponent },
-      { path: 'cars/filter/:brandId/:colorId', component: CarComponent },
-
       {
-        path: 'cars/carDetail/:carId/update',
+        path: 'cars/carDetail/:carId/edit/:carId',
         component: CarCrudComponent,
         canActivate: [LoginGuard],
       },
+
+      //  Marka ve  Renge Göre Filtre Araba İşlemleri
+
+      { path: 'cars/filter/:brandId/:colorId', component: CarComponent },
+
+      {
+        path: 'cars/filter/:brandId/:colorId/carDetail/:carId',
+        component: CarDetailComponent,
+      },
+      {
+        path: 'cars/filter/:brandId/:colorId/carDetail/:carId/edit/:carId',
+        component: CarCrudComponent,
+        canActivate: [LoginGuard],
+      },
+
+      //  Markaya Göre Araba İşlemleri
+
+      { path: 'cars/brand/:brandId', component: CarComponent },
+      {
+        path: 'cars/brand/:brandId/carDetail/:carId',
+        component: CarDetailComponent,
+      },
+      {
+        path: 'cars/brand/:brandId/carDetail/:carId/edit/:carId',
+        component: CarCrudComponent,
+        canActivate: [LoginGuard],
+      },
+
+      //  Renge Göre Araba İşlemleri
+
+      { path: 'cars/color/:colorId', component: CarComponent },
+      {
+        path: 'cars/color/:colorId/carDetail/:carId',
+        component: CarDetailComponent,
+      },
+      {
+        path: 'cars/color/:colorId/carDetail/:carId/edit/:carId',
+        component: CarCrudComponent,
+        canActivate: [LoginGuard],
+      },
+
+      //     // Filter ile sadece marka
+
+      //     { path: 'cars/filter/:brandId/', component: CarComponent },
+      //     {
+      //       path: 'cars/filter/:brandId/carDetail/:carId',
+      //       component: CarDetailComponent,
+      //     },
+      //     {
+      //       path: 'cars/filter/:brandId/carDetail/:carId/edit/:carId',
+      //       component: CarCrudComponent,
+      //       canActivate: [LoginGuard],
+      //     },
+
+      //  // Filter ile sadece renk
+
+      //     { path: 'cars/filter/:colorId', component: CarComponent },
+      //     {
+      //       path: 'cars/filter/:colorId/carDetail/:carId',
+      //       component: CarDetailComponent,
+      //     },
+      //     {
+      //       path: 'cars/filter/:colorId/carDetail/:carId/edit/:carId',
+      //       component: CarCrudComponent,
+      //       canActivate: [LoginGuard],
+      //     },
+
+      //     //
+
+     // { path: 'cars/carImages/:carId', component: CarImageComponent },
 
       {
         path: 'cars/add',
@@ -83,16 +151,6 @@ const routes: Routes = [
       },
 
       { path: 'rentals', component: RentalComponent },
-      {
-        path: 'payment/:rental',
-        component: PaymentComponent,
-        canActivate: [LoginGuard],
-      },
-
-
-
-      
-      
     ],
   },
 ];

@@ -4,7 +4,6 @@
     <div class="card-body">
       <div class="col col-12">
         <select [(ngModel)]="brandIdFilter" class="form-select">
-          <!-- <option selected>Araba Markası Seçin</option> -->
           <option
             *ngFor="let brand of brands"
             [value]="brand.id"
@@ -19,7 +18,7 @@
 
       <div class="col col-12">
         <select [(ngModel)]="colorIdFilter" class="form-select">
-          <!-- <option selected>Araba Rengini Seçin</option> -->
+
 
           <option
             *ngFor="let color of colors"

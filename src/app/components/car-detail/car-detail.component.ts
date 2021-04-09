@@ -26,6 +26,7 @@ export class CarDetailComponent implements OnInit {
       if (params['carId']) {
         this.getByIdCarDetail(params['carId']);
       }
+      console.log("Parametre:" + params['carId']);
     });
   }
 
