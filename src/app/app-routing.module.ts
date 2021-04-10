@@ -15,6 +15,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { AdminGuard } from './guards/admin.guard';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -24,12 +25,12 @@ const routes: Routes = [
   {
     path: 'setting',
     component: SettingComponent,
-    canActivate: [LoginGuard],
+    canActivate: [LoginGuard,AdminGuard],
   },
   {
     path: 'account',
     component: AccountComponent,
-    canActivate: [LoginGuard],
+    canActivate: [LoginGuard,AdminGuard],
   },
 
   {
@@ -49,7 +50,7 @@ const routes: Routes = [
       {
         path: 'cars/carDetail/:carId/edit/:carId',
         component: CarCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
 
       //  Marka ve  Renge Göre Filtre Araba İşlemleri
@@ -63,7 +64,7 @@ const routes: Routes = [
       {
         path: 'cars/filter/:brandId/:colorId/carDetail/:carId/edit/:carId',
         component: CarCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
 
       //  Markaya Göre Araba İşlemleri
@@ -76,7 +77,7 @@ const routes: Routes = [
       {
         path: 'cars/brand/:brandId/carDetail/:carId/edit/:carId',
         component: CarCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
 
       //  Renge Göre Araba İşlemleri
@@ -89,7 +90,7 @@ const routes: Routes = [
       {
         path: 'cars/color/:colorId/carDetail/:carId/edit/:carId',
         component: CarCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
 
       //     // Filter ile sadece marka
@@ -120,37 +121,41 @@ const routes: Routes = [
 
       //     //
 
-     // { path: 'cars/carImages/:carId', component: CarImageComponent },
+      // { path: 'cars/carImages/:carId', component: CarImageComponent },
 
       {
         path: 'cars/add',
         component: CarCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
 
       {
         path: 'brands/add',
         component: BrandCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
       {
         path: 'brands/add/:brandId',
         component: BrandCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
 
       {
         path: 'colors/add',
         component: ColorCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
       {
         path: 'colors/add/:colorId',
         component: ColorCrudComponent,
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard, AdminGuard],
       },
 
-      { path: 'rentals', component: RentalComponent },
+      {
+        path: 'rentals',
+        component: RentalComponent,
+        canActivate: [LoginGuard],
+      },
     ],
   },
 ];
